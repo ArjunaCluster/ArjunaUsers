@@ -1,3 +1,10 @@
+---
+layout: default
+title: Linux Resources
+parent: Getting Started
+nav_order: 3
+---
+
 # Linux - It's Fun We Promise
 
 This page is intended to provide a collection of resources for beginning linux

@@ -1,3 +1,9 @@
+---
+title: Home
+layout: default
+nav_order: 1
+---
+
 # User Guide for Arjuna #
 
 The files in this folder will cover the following items

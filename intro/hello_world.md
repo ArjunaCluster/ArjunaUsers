@@ -1,16 +1,20 @@
+---
+title: Your First Job
+layout: default
+parent: Getting Started
+nav_order: 2
+---
+
 # Submitting Your First Job
 
 This tutorial will guide you through the process of submitting your first job on
 Arjuna. This tutorial assumes you've already done the following items
 
-1) Login to Arjuna via `ssh`
-2) Some familiarity with entering commands at a `bash` shell
-3) Some familiarity with `vim` or another command line file editor
+1. Login to Arjuna via `ssh`
+2. Some familiarity with entering commands at a `bash` shell
+3. Some familiarity with `vim` or another command line file editor
 
-Checkout [Intro to Linux] for some help with the above topics.
-
-[Intro to Linux]: linux.md
-
+If you haven't done the above, checkout the documentation under [Getting Started](./)
 ## Hello World
 
 For this example create a file called `~/hello_world.sh` with the following
@@ -89,7 +93,8 @@ Hello World!
 ```
 
 > By default SLURM will create this file, but you can change it's name via
-> `#SBATCH` directives or command line flags to `sbatch`
+> `#SBATCH -output` directives or `sbatch`'s command line flags `--output`.
+> See [sbatch] for more information.
 
 
 This file will contain the [standard output] of our script `~/hello_world.sh`,
@@ -106,16 +111,16 @@ echo "Hello World!" > ~/another_file.txt
 This will instead write "Hello World!" to `~/another_file.txt` instead of `slurm-<jobid>.out`.
 Note: this will still create a `slurm-<jobid>.out`, but now it will be an empty file.
 
-> This uses [Redirection] (The `>` symbol) to create the other file, but you're
-> not limited to this
+> The `>` tells bash we what to redirect the output of `echo` to `~/another_file.txt`.
+> Check out [Redirection] for more information
 
 [standard output]: https://en.wikipedia.org/wiki/Standard_streams
 [Redirection]: https://www.gnu.org/software/bash/manual/html_node/Redirections.html
 
 ## What's Next?
 
-- [Job Arrays]: For submitting lots of similar jobs
-- [Heterogenous Jobs]: For submitting jobs made up of multiple job steps
+- [Job Arrays] for submitting lots of similar jobs
+- [Heterogenous Jobs] for submitting jobs made up of multiple job steps
 
 [Job Arrays]: https://slurm.schedmd.com/job_array.html
 [Heterogenous Jobs]: https://slurm.schedmd.com/heterogeneous_jobs.html
