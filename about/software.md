@@ -20,7 +20,7 @@ In general, we recommend users install additional software to their home directo
 and independently manage / maintain it. The `/home` directory is stored on the
 [RAID storage] and thus is immediately available on all Compute Nodes.
 
-[RAID storage]: ./hardware#raid-storage
+[RAID storage]: {% link about/hardware.md %}#raid-storage
 
 Before installing software, please refer to the software already installed by
 other users on the cluster.

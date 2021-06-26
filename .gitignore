@@ -1,3 +1,18 @@
-_site/
+# Misc
+*#
+Icon*
+*/Icon*
+*/*/Icon*
+.jekyll-cache/*
+*.DS_Store
+*/.DS_Store
+*~
+*.jekyll-metadata
 Gemfile.lock
-.jekyll-cache/
+pip.install
+.bundle/
+vendor/
+
+# Make Targets
+_site/
+*.zip

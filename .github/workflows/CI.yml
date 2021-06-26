@@ -1,0 +1,21 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+  test:
+    name: Test and Build Site
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3
+          bundler-cache: true
+      - run: make -j build
+      - run: make -j test
+      - run: make -j site.zip
+      - uses: actions/upload-artifact@v2
+        with:
+          name: site
+          path: site.zip
