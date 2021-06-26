@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Linux Resources
+title: Other Resources
 parent: Getting Started
 nav_order: 3
 ---
 
-# Linux - It's Fun We Promise
+# Other Resouces
 
 This page is intended to provide a collection of resources for beginning linux
 user. Navigating linux, the command line or `git` have all been extensively
@@ -55,3 +55,12 @@ when navigating git.
 
 - [SourceTree](https://www.sourcetreeapp.com/)
 - [Other GUIs](https://git-scm.com/downloads/guis/)
+
+## High Performance Computing
+
+**[PSC's Getting Started with HPC]:** Pittsburgh Supercomputers Center's guide
+to getting started with HPC.
+
+[PSC's Getting Started with HPC]: https://www.psc.edu/resources/bridges-2/getting-started-with-hpc/
+
+**[SLURM](https://slurm.schedmd.com/):** SLURM's Documentations
