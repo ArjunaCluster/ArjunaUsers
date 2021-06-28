@@ -5,12 +5,10 @@ parent: Getting Started
 nav_order: 3
 ---
 
-# Other Resouces
+# Other Resources
 
-This page is intended to provide a collection of resources for beginning linux
-user. Navigating linux, the command line or `git` have all been extensively
-written about by much smarter and more literate people. As such this page will
-mainly be links out to other resource, with some rough guidelines on reading order.
+This page provides a collection of external resources for various topics related
+to utilizing Arjuna, navigating Linux, and related tools.
 
 ## General Linux
 
@@ -25,18 +23,17 @@ Everything you wanted to know and more
 
 ## Git
 
-**[Pro Git](https://git-scm.com/book/en/v2):** Despite the name this is a very
-accessible book, that does dive deep in later chapters. We recommend starting
-with the following chapters:
+**[Pro Git](https://git-scm.com/book/en/v2):** Despite the name, Pro Git, is a
+very accessible book. We recommend starting with the following chapters:
 
-    - [Git Basics]: Quick, but through introduction to using git
+    - [Git Basics]: Quick but thorough introduction to using git
     - [Git Branching]: Solid intro into what branches are and how to use them
 
 [Git Basics]: https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository
 [Git Branching]: https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell
 
 **[Learn Git Branching]:** An interactive simulator of a git with easy to follow
-tutorials and a great visual representation of what's going on.
+tutorials and a great visual representation of what is going on.
 
 [Learn Git Branching]: https://learngitbranching.js.org/
 
@@ -56,7 +53,7 @@ when navigating git.
 - [SourceTree](https://www.sourcetreeapp.com/)
 - [Other GUIs](https://git-scm.com/downloads/guis/)
 
-## High Performance Computing
+## High-Performance Computing
 
 **[PSC's Getting Started with HPC]:** Pittsburgh Supercomputers Center's guide
 to getting started with HPC.

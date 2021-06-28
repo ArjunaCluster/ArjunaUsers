@@ -8,5 +8,7 @@ has_children: true
 
 # Getting Started
 
-Welcome to Arjuna! The following pages are to help you get started running
-jobs on the Arjuna cluster.
+This section contains documentation about connecting to Arjuna, submitting jobs
+to [SLURM] and links to external resources.
+
+[SLURM]: https://slurm.schedmd.com/

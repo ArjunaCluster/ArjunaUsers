@@ -12,12 +12,12 @@ Arjuna. This tutorial assumes you've already done the following items
 
 1. Login to Arjuna via `ssh`
 2. Some familiarity with entering commands at a `bash` shell
-3. Some familiarity with `vim` or another command line file editor
+3. Some familiarity with `vim` or another command-line file editor
 
-If you haven't done the above, checkout the documentation under [Getting Started](./)
+Documentation for the above tasks can be found under [Getting Started](./)
 ## Hello World
 
-For this example create a file called `~/hello_world.sh` with the following
+For this example, create a file called `~/hello_world.sh` with the following
 content:
 
 ```bash
@@ -29,24 +29,21 @@ echo "Hello World!"
 
 ### What do the lines mean?
 
-1) `#!/bin/bash` This is a [shebang] it tells linux how to handle the file.
+1) `#!/bin/bash` This is a [shebang] it tells Linux how to handle the file.
 Here's we're saying use `bash` to run this file
 2) `#SBATCH --cpus=1` This is a SLURM directive asking for 1 CPU
 3) `#SBATCH --mem=2G` Now we're asking for 2G of Memory in bytes. Notice the
-suffix `G`, the default is `M` but we can also use `K` or `T`
-4) `echo "Hello World!"` This is command that we're actually running
+suffix `G`, the default suffix is `M`, but we can also use `K` or `T`
+4) `echo "Hello World!"` This is the command that gets run on the compute node
 
-For more SLURM directive checkout `man sbatch` or the documentation for [sbatch].
-
-
+For more SLURM directives, see `man sbatch` or the documentation for [sbatch].
 
 [shebang]: https://en.wikipedia.org/wiki/Shebang_(Unix)
 [sbatch]: https://slurm.schedmd.com/sbatch.html
 
 ### Submitting the Job
 
-To submit our job we no run the following command: `sbatch ~/test.sh`.
-You should see something like the following:
+To submit the job, run the following command: `sbatch ~/test.sh`.
 
 ```shell
 > sbatch ~/test.sh
@@ -54,8 +51,7 @@ Submitted batch job 2970359
 
 ```
 
-Check that status of your job in the queue using: `squeue -u $(whoami)`.
-You should get something similar to the following:
+Check the job's status in the queue using: `squeue -u $(whoami)`.
 
 ```shell
 > squeue -u $(whoami)
@@ -64,15 +60,18 @@ You should get something similar to the following:
 
 ```
 
-The `squeue` command lets you look at the state of SLURM's que
-(The jobs you and other have submitted to it).
+> The `-u $(whoami)` flag cause `squeue` to only show jobs for the current user.
+> Omitting this will show the entire queue.
+
+The `squeue` command displays the current state of SLURM's queue and by default
+the following columns:
 
 | Name | Description |
 |------|-------------|
 | JOBID     | The numerical id SLURM uses to identify a job |
 | PARTITION | The partition the job was submitted to |
 | USER      | Who submitted the job |
-| ST        | The state if the job, check the docs for a list of abbreviations |
+| ST        | The state of the job, see the docs for a list of abbreviations |
 | TIME      | How long the job has been running for |
 | Nodes     | How many nodes the job is running on |
 | NODELIST(REASON) | Why the job isn't running or a list of the nodes it's running on |
@@ -97,8 +96,8 @@ Hello World!
 > See [sbatch] for more information.
 
 
-This file will contain the [standard output] of our script `~/hello_world.sh`,
-but we're not limited to just this file. We could also write to a different file,
+This file will contain the [standard output] of the script `~/hello_world.sh`.
+Job scripts are not limited to just this file. Output can be saved to other files
 like this:
 
 ```bash
@@ -108,8 +107,9 @@ like this:
 echo "Hello World!" > ~/another_file.txt
 ```
 
-This will instead write "Hello World!" to `~/another_file.txt` instead of `slurm-<jobid>.out`.
-Note: this will still create a `slurm-<jobid>.out`, but now it will be an empty file.
+This will instead write "Hello World!" to `~/another_file.txt` instead of
+`slurm-<jobid>.out`. Slurm will still create a `slurm-<jobid>.out` file, but now
+it will now be empty.
 
 > The `>` tells bash we what to redirect the output of `echo` to `~/another_file.txt`.
 > Check out [Redirection] for more information

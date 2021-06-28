@@ -7,5 +7,5 @@ has_children: true
 
 # About Arjuna
 
-Here you'll find information about Arjuna's computing resources, available
+This section contains information about Arjuna's computing resources available
 partitions and usage limits.

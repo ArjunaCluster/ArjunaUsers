@@ -11,12 +11,12 @@ documentation about what Arjuna is and how to use it.
 
 ## Support
 
-If you encounter an issue using Arjuna, please [open an issue], and let us know.
-We'll do our best to get it sorted out.
+If you encounter an issue using Arjuna, please [open an issue] and let us know.
+We will do our best to get it sorted out.
 
 [open an issue]: https://github.com/ArjunaCluster/ArjunaUsers/issues/
 
-If you're having trouble and just want to talk to someone, we recommend sending
+If you are having trouble and want to talk to someone, we recommend sending
 an email to the list server: <arjuna-users@lists.andrew.cmu.edu>.
 
 ## Contributing
@@ -28,9 +28,9 @@ first [open an issue], but welcome [pull requests] to improve our documentation.
 
 ## Maintenance
 
-Arjuna will be taken offline for periodic updates, maintenance and upgrades.
-Users will be provided at least two week's notice via the list-serve email,
-and via the login in message on Arjuna.
+Arjuna will be taken offline for periodic updates, maintenance, and upgrades. We
+will provide at least two week's notice via the list-serve email and via the
+login message on Arjuna.
 
 - Summary of Planned Activities
 - Expected Duration

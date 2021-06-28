@@ -9,14 +9,15 @@ nav_order: 1
 
 ## Head Node
 
-When you ssh into Arjuna you are connected to the Head Node. This machine is
-for used for transferring file to/from Arjuna and submitting jobs to the cluster.
-The Head Node does have internet access.
+When you ssh into Arjuna, you connect to the Head Node. From this machine, you
+can do the following
 
-> Do not run compute jobs on the head node! This include Jupyter Notebooks
+- Transfer files to/from Arjuna to a local machine
+- Download files from the internet
+- Submit jobs to the cluster
+- Monitor the status of existing jobs
 
-The head node is a multi-user environment, please be cognizant of how your actions
-(heavy compute, downloading large files, lots of IO) can impact other users.
+> Do not run compute jobs on the head node
 
 ## Compute Nodes
 
@@ -34,13 +35,13 @@ Arjuna has a 20 TB of [RAID 0] storage for the entire cluster. This filesystem
 is not backed up and has no redundancy or fault tolerance. ***A single disk failure
 will result in a total loss of data.***
 
-> Long term storage of data on Arjuna is not recommended. Please store important
+> Arjuna's RAID Storage is not for long-term storage of data. Please store important
 > or critical data elsewhere.
 
 [RAID 0]: https://en.wikipedia.org/wiki/Standard_RAID_levels#RAID_0
 
-Weekly disk usage emails are sent out via the list serve. Please be mindful
-of your usage, and remove files when they are not longer needed.
+Weekly disk usage emails are sent out via the list-serve. Please be mindful
+of your usage, and promptly remove unused files.
 
 The following command will remove all files in your home directory with a given
 type (This example will remove `*.gpw` files)

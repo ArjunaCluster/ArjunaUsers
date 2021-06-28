@@ -10,15 +10,15 @@ nav_order: 2
 Arjuna uses `modules` to provide access to some common software packages and tools.
 For a complete list of the currently available software run: `module avail`
 
-A particular module can then be loaded via: `module load module_name`.
+To load a module named `module_name` run: `module load module_name`
 
-For more information see the [Lmod's documentation](https://lmod.readthedocs.io).
+For more information, see [Lmod's documentation](https://lmod.readthedocs.io).
 
 ## Requesting Additional Software
 
 In general, we recommend users install additional software to their home directory
-and independently manage / maintain it. The `/home` directory is stored on the
-[RAID storage] and thus is immediately available on all Compute Nodes.
+and independently manage/maintain it. As files placed in a user's home directory
+are immediately available on the compute nodes via the [RAID storage].
 
 [RAID storage]: {% link about/hardware.md %}#raid-storage
 
