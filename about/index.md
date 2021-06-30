@@ -7,5 +7,5 @@ has_children: true
 
 # About Arjuna
 
-This section contains information about Arjuna's computing resources available
-partitions and usage limits.
+This section contains information about Arjuna's computing resources, available
+partitions, and usage limits.
