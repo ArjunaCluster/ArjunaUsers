@@ -55,4 +55,3 @@ type (This example will remove `*.gpw` files)
 find ~ -name `*.gpw` -delete
 ```
 
-# Partitions
