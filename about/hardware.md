@@ -17,17 +17,17 @@ can do the following
 - Submit jobs to the cluster
 - Monitor the status of existing jobs
 
-> DO NOT run compute jobs on the head node. Moreover, do not use the headnode for anything other than submitting jobs to compute nodes. Unauthorized uses of the head node include, but are not limited to:
->-Running Jupyter Notebooks to analyze data
->-Webscraping
->-Running Simulations
+**DO NOT** run compute jobs on the head node. Moreover, do not use the headnode for anything other than submitting jobs to compute nodes. Unauthorized uses of the head node include, but are not limited to:
+-Running Jupyter Notebooks to analyze data
+-Webscraping
+-Running Simulations
 
->Authorized uses of the headnode include, but are not limited to:
->-Installing software for use on the compute nodes
->-Moving data to and from Arjuna
->-Submitting jobs
+Authorized uses of the headnode include, but are not limited to:
+-Installing software for use on the compute nodes
+-Moving data to and from Arjuna
+-Submitting jobs
 
-If the desired compute task is anything other than trivial operations, it should be run on a worker node or elsewhere
+If the desired compute task is anything other than trivial operations required for job submission which can only be run on the headnode of arjuna, it should be run on a worker node or elsewhere.
 
 ## Compute Nodes
 
