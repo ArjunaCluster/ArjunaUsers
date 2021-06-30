@@ -27,8 +27,6 @@ Arjuna has the following compute nodes available for usage
 - 2 high-memory nodes, each with 512 GB memory and 32 cores
 - 27 GPU nodes, each with 128 GB memory, 64 cores, and 4 K80 NVIDIA GPUs
 
-Compute Nodes do not have access to the internet.
-
 ## RAID Storage
 
 Arjuna has a 20 TB of [RAID 0] storage for the entire cluster. This filesystem
