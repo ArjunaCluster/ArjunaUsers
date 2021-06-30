@@ -9,21 +9,31 @@ nav_order: 1
 
 ## Head Node
 
-When you ssh into Arjuna, you connect to the Head Node. From this machine, you
+When you ssh into Arjuna, you connect to the "Head Node", also known as c001. From this machine, you
 can do the following
 
-- Transfer files to/from Arjuna to a local machine
+- Transfer files to/from Arjuna to a local machine (ie a compute node or another computer connected to the CMU network to which you have access)
 - Download files from the internet
 - Submit jobs to the cluster
 - Monitor the status of existing jobs
 
-> Do not run compute jobs on the head node
+> DO NOT run compute jobs on the head node. Moreover, do not use the headnode for anything other than submitting jobs to compute nodes. Unauthorized uses of the head node include, but are not limited to:
+>-Running Jupyter Notebooks to analyze data
+>-Webscraping
+>-Running Simulations
+
+>Authorized uses of the headnode include, but are not limited to:
+>-Installing software for use on the compute nodes
+>-Moving data to and from Arjuna
+>-Submitting jobs
+
+If the desired compute task is anything other than trivial operations, it should be run on a worker node or elsewhere
 
 ## Compute Nodes
 
 Arjuna has the following compute nodes available for usage
 
-- 70 CPU nodes, each with 128 GB memory and 56 cores
+- 58 CPU nodes, each with 128 GB memory and 56 cores
 - 2 high-memory nodes, each with 512 GB memory and 32 cores
 - 27 GPU nodes, each with 128 GB memory, 64 cores, and 4 K80 NVIDIA GPUs
 
