@@ -29,14 +29,11 @@ Arjuna has the following compute nodes available for usage
 
 ## RAID Storage
 
-Arjuna has a 20 TB of [RAID 0] storage for the entire cluster. This filesystem
-is not backed up and has no redundancy or fault tolerance. ***A single disk failure
-will result in a total loss of data.***
+Arjuna has a 20 TB of [RAID 6] storage for the entire cluster. 
 
-> Arjuna's RAID Storage is not for long-term storage of data. Please store important
-> or critical data elsewhere.
+> Arjuna's RAID Storage is not for long-term storage of data. Please use other resources, such as CMU's unlimited google drive access, to store data for long term.
 
-[RAID 0]: https://en.wikipedia.org/wiki/Standard_RAID_levels#RAID_0
+[RAID 6]: https://en.wikipedia.org/wiki/Standard_RAID_levels#RAID_6
 
 Weekly disk usage emails are sent out via the list-serve. Please be mindful
 of your usage, and promptly remove unused files.
