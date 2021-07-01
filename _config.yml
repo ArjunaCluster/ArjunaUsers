@@ -3,7 +3,7 @@ domain: arjunacluster.github.io
 url: https://arjunacluster.github.io
 baseurl: /ArjunaUsers/
 
-theme: "just-the-docs"
+theme: pmarsceill/just-the-docs
 color_scheme: "light"
 search_enabled: true
 
