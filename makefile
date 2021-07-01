@@ -1,4 +1,5 @@
-BASEURL ?= /
+# Pull the baseurl from _config.yml
+BASEURL ?= $(shell grep baseurl _config.yml | awk '{print $2}')
 
 build: _site/
 

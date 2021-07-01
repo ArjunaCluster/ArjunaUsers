@@ -20,7 +20,7 @@ In general, we recommend users install additional software to their home directo
 and independently manage/maintain it. As files placed in a user's home directory
 are immediately available on the compute nodes via the [RAID storage].
 
-[RAID storage]: {% link about/hardware.md %}#raid-storage
+[RAID storage]: hardware.md#raid-storage
 
 Before installing software, please refer to the software already installed by
 other users on the cluster.

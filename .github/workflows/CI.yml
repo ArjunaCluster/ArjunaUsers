@@ -14,8 +14,3 @@ jobs:
           bundler-cache: true
       - run: make -j build
       - run: make -j test
-      - run: make -j site.zip
-      - uses: actions/upload-artifact@v2
-        with:
-          name: site
-          path: site.zip
