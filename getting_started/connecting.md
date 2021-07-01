@@ -78,8 +78,8 @@ You can now log in without entering your password!
 
 ### Using a SSH Config File
 
-You can simplify logging in to arjuna by creating an `~/.ssh/config` file to
-specify common option (i.e. your username) or create an alias for arjuna.
+You can simplify logging in to Arjuna by creating an `~/.ssh/config` file to
+specify common option (i.e. your username) or create an alias for Arjuna.
 
 For example, the following config will let you connect with `ssh arjuna`
 instead of having to type out the full `ssh andrewID@arjuna.psc.edu` each time.
@@ -116,7 +116,7 @@ Host arjuna
 
 # Skip CMU's VPN and connect to Arjuna via unix.andrew.cmu.edu
 # You will be prompted for your CMU password to login to unix.andrew.cmu.edu
-# before being forwarded to arjuna
+# before being forwarded to Arjuna
 Host arjuna-jump
     User andrewID
     ForwardAgent yes
