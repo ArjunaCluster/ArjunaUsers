@@ -18,7 +18,7 @@ to utilizing Arjuna, navigating Linux, and related tools.
 
 ## Bash
 
-**[GNU Manuel](https://www.gnu.org/software/bash/manual/html_node/index.html):**
+**[GNU Manual](https://www.gnu.org/software/bash/manual/html_node/index.html):**
 Everything you wanted to know and more
 
 ## Git
