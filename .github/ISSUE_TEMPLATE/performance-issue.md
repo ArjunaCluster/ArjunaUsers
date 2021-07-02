@@ -2,7 +2,7 @@
 name: Performance Issue
 about: Template for Reporting Performance Issues on Arjuna
 title: New User Request
-labels: admin-tasks
+labels: maint
 assignees: ''
 
 ---
