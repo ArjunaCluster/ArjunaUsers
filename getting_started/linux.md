@@ -26,8 +26,8 @@ Everything you wanted to know and more
 **[Pro Git](https://git-scm.com/book/en/v2):** Despite the name, Pro Git, is a
 very accessible book. We recommend starting with the following chapters:
 
-    - [Git Basics]: Quick but thorough introduction to using git
-    - [Git Branching]: Solid intro into what branches are and how to use them
+- [Git Basics] - Quick but thorough introduction to using git
+- [Git Branching] - Solid intro into what branches are and how to use them
 
 [Git Basics]: https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository
 [Git Branching]: https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell
