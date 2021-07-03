@@ -1,12 +1,11 @@
 import subprocess
 import logging
-import math
 import re
-from datetime import datetime, time, timedelta
-from typing_extensions import runtime
+from datetime import date, datetime, timedelta
 import pandas as pd
 import numpy as np
 from matplotlib import pyplot as plt
+from mstat.reports import parse_usage, format_usage
 
 logging.basicConfig()
 LOG = logging.getLogger("stats")
@@ -87,22 +86,25 @@ def sacct():
         ("NNodes", int),
         ("NTasks", lambda x: int(x) if x else None),
     ]
+    # Get Prior Week
+    ref = date.today().isocalendar()
+    endtime = datetime.fromisocalendar(year=ref.year, week=ref.week, day=1)
+    starttime = endtime - timedelta(days=7)
     cmd = [
         "sacct",
         "-Pan",
-        "--starttime 5/20/21",
-        "--endtime 6/27/21",
+        f"--starttime {starttime.isoformat()}",
+        f"--endtime {endtime.isoformat()}",
         f"--format='{','.join([f[0] for f in fields])}'",
     ]
     LOG.debug(" ".join(cmd))
-    """     proc = subprocess.Popen(
+    proc = subprocess.Popen(
         " ".join(cmd), shell=True, stdout=subprocess.PIPE, encoding="UTF-8"
-    ) """
-    with open("sacct.out", "r") as io:
-        records = __sacct_record(fields, io)
-        df = pd.DataFrame.from_records(records)
+    )
+    records = __sacct_record(fields, proc.stdout)
+    df = pd.DataFrame.from_records(records)
 
-    return __parse_reqmem(df)
+    return __parse_reqmem(df), starttime, endtime
 
 
 def __sacct_record(keys, stream):
@@ -129,7 +131,6 @@ def plot_wait_times(ax, df):
     ax.set_xlabel("Queue Wait Time [hr]")
     ax.set_ylabel("Job Count")
     ax.set_xscale("linear")
-    wait_times.to_csv("wait_time")
 
 
 # Convert ReqMem to bytes
@@ -145,15 +146,15 @@ def __parse_reqmem(df):
             LOG.warn("Got ReqMem type of %s for job %d", mem_type, job["JobId"])
             return mem_bytes
 
-    df["ReqMemOut"] = df.apply(tf, axis=1)
-    print(df)
-    df["ReqMem"] = df["ReqMemOut"]
+    df["ReqMem"] = df.apply(tf, axis=1)
     return df
 
 
 def plot_job_eff(ax, df) -> pd.DataFrame:
     # Extract Allocated Memory from ReqTRES and reduce to required columns
-    job_eff = df.groupby("JobId").filter(lambda x: (~x.State.isin(["PENDING", "RUNNING"])).all())
+    job_eff = df.groupby("JobId").filter(
+        lambda x: (~x.State.isin(["PENDING", "RUNNING"])).all()
+    )
     job_eff = job_eff[job_eff.CPUTime > 0]
     job_eff["MaxRSS"] = job_eff["MaxRSS"] * job_eff["NTasks"]
     job_eff = job_eff[
@@ -217,25 +218,24 @@ def plot_time_eff(ax, df):
 
 
 if __name__ == "__main__":
-    df = sacct()
-    df.to_csv("sacct.csv")
+    df, starttime, endtime = sacct()
 
     fig, axes = plt.subplots(nrows=2, ncols=2)
+    fmt = "%b %e"
+    fig.suptitle(f"Usage for {starttime.strftime(fmt)} - {endtime.strftime(fmt)}")
 
     # Plot Wait Times
     plot_wait_times(axes[0, 0], df)
 
     # Plot Time Efficiencies
     time_eff = plot_time_eff(axes[0, 1], df)
-    time_eff.to_csv("time_eff.csv")
 
     # Compute CPU/Memory Efficiency
     job_eff = plot_job_eff(axes[1], df)
-    job_eff.to_csv("job_eff_out.csv")
 
     # Save Dashboard
     fig.tight_layout()
-    plt.savefig("queue_time.png")
+    plt.savefig("img/weekly_usage.png")
 
     # Get User Job Efficiency
     job_users = (
@@ -258,15 +258,31 @@ if __name__ == "__main__":
     )
     user_time_eff["time_eff"] = user_time_eff["Elapsed"] / user_time_eff["Timelimit"]
 
-    # Write to markdown
-    user_stats = user_job_eff[["TotalCPU", "cpu_eff", "mem_eff"]]
+    # Get User Disk Usage
+    user_stats = pd.DataFrame.from_dict(
+        parse_usage()[0], orient="index", columns=["DiskUsage"]
+    )
+    user_stats.index.rename("User", inplace=True)
+
+    # Merge in Efficiencies
+    user_stats = user_stats.merge(
+        user_job_eff[["TotalCPU", "cpu_eff", "mem_eff"]],
+        how="outer",
+        left_index=True,
+        right_index=True,
+    )
     user_stats = user_stats.merge(
         user_time_eff["time_eff"],
         how="outer",
         left_index=True,
         right_index=True,
     )
-    user_stats.sort_values("TotalCPU", ascending=False, inplace=True)
+    user_stats.sort_values(
+        ["TotalCPU", "DiskUsage", "User"], ascending=[False, False, True], inplace=True
+    )
+
+    # Format for printing
+    user_stats["DiskUsage"] = user_stats["DiskUsage"].map(format_usage)
     user_stats["TotalCPU"] = user_stats["TotalCPU"].map(
         lambda x: f"{x:8.3G}" if ~np.isnan(x) else ""
     )
@@ -275,15 +291,14 @@ if __name__ == "__main__":
             user_stats[k] = user_stats[k].map(
                 lambda x: f"{x:3.1%}" if ~np.isnan(x) else ""
             )
-    user_stats.rename(
-        columns={
-            "TotalCPU": "Core-hours",
-            "cpu_eff": "CPU Eff. [%]",
-            "mem_eff": "Memory Eff. [%]",
-            "time_eff": "Time Eff. [%]",
-        },
-        inplace=True,
-    )
-    user_stats.to_csv("user_stats.csv")
-    with open("user_stats.md", "w") as io:
+
+    heading = {
+        "TotalCPU": "Core-hours",
+        "DiskUsage": "Disk Usage",
+        "cpu_eff": "CPU Eff. [%]",
+        "mem_eff": "Memory Eff. [%]",
+        "time_eff": "Time Eff. [%]",
+    }
+    user_stats = user_stats.rename(columns=heading).reindex(columns=heading.values())
+    with open("_includes/user_stats.md", "w") as io:
         user_stats.to_markdown(io, tablefmt="github")
