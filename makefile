@@ -1,5 +1,5 @@
 # Pull the baseurl from _config.yml
-BASEURL ?= $(shell grep baseurl _config.yml | awk '{print $2}')
+BASEURL := $(shell grep baseurl _config.yml | awk '{print $$2}')
 
 .PHONY: build serve test install
 
@@ -18,7 +18,7 @@ pip.install: requirements.txt
 SRC := $(shell git ls-tree -r --name-only HEAD -- **/*.md)
 _site/: Gemfile.lock _config.yml $(SRC)
 	rm -rf $@ && mkdir -p $@
-	bundle exec jekyll build -d $(join $@, $(BASEURL)) -b $(BASEURL)
+	bundle exec jekyll build -d $@$(BASEURL) -b $(BASEURL)
 	touch $@
 
 # Run test on the website using htmlproofer
