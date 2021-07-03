@@ -1,0 +1,20 @@
+name: Auto Merge Weekly Usage
+on:
+  workflow_run:
+    workflows: ["CI"]
+    branches: [weekly_usage]
+    types:
+      - completed
+
+jobs:
+  merge-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Merge staging -> uat
+        uses: devmasx/merge-branch@v1.3.1
+        with:
+          type: now
+          target_branch: main
+          github_token: ${{ github.token }}
