@@ -16,3 +16,7 @@ vendor/
 # Make Targets
 _site/
 *.zip
+
+# Python
+__pycache__/
+pip.install
