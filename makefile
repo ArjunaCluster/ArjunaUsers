@@ -3,6 +3,8 @@ BASEURL := $(shell grep baseurl _config.yml | awk '{print $$2}')
 
 .PHONY: build serve test install
 
+.PHONY: build serve test install
+
 build: _site/
 
 install: Gemfile.lock pip.install
