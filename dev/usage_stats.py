@@ -2,7 +2,7 @@ import subprocess
 import logging
 import math
 import re
-from datetime import datetime, timedelta
+from datetime import datetime, time, timedelta
 from typing_extensions import runtime
 import pandas as pd
 import numpy as np
@@ -37,6 +37,8 @@ def __parse_duration(str):
         hours = 0
         minutes = int(hms[0])
         seconds = float(hms[1])
+    elif str == "UNLIMITED":
+        return np.inf
     else:
         return None
     return timedelta(
@@ -72,7 +74,7 @@ def sacct():
         ("JobIdRaw", lambda x: x.split(".")[0]),
         ("User", str),
         ("Account", str),
-        ("State", str),
+        ("State", lambda x: "CANCELLED" if "CANCELLED" in x else x),
         ("Start", __parse_time),
         ("Submit", __parse_time),
         ("Elapsed", __parse_duration),
@@ -124,9 +126,10 @@ def plot_wait_times(ax, df):
         grid=False,
         log=True,
     )
-    ax.set_xlabel("Queue Wait Time [min]")
+    ax.set_xlabel("Queue Wait Time [hr]")
     ax.set_ylabel("Job Count")
     ax.set_xscale("linear")
+    wait_times.to_csv("wait_time")
 
 
 # Convert ReqMem to bytes
@@ -150,7 +153,7 @@ def __parse_reqmem(df):
 
 def plot_job_eff(ax, df) -> pd.DataFrame:
     # Extract Allocated Memory from ReqTRES and reduce to required columns
-    job_eff = df.groupby("JobId").filter(lambda x: (x.State == "COMPLETED").all())
+    job_eff = df.groupby("JobId").filter(lambda x: (~x.State.isin(["PENDING", "RUNNING"])).all())
     job_eff = job_eff[job_eff.CPUTime > 0]
     job_eff["MaxRSS"] = job_eff["MaxRSS"] * job_eff["NTasks"]
     job_eff = job_eff[
@@ -166,7 +169,7 @@ def plot_job_eff(ax, df) -> pd.DataFrame:
 
     # Compute Efficiencies
     job_eff["cpu_eff"] = 100 * (job_eff.TotalCPU / job_eff.CPUTime)
-    job_eff["mem_eff"] = 100 * (job_eff.MaxRSS*job_eff.TotalCPU) / (job_eff.ReqMem *job_eff.TotalCPU)
+    job_eff["mem_eff"] = 100 * (job_eff.MaxRSS / job_eff.ReqMem)
 
     # Plot CPU Efficiencies
     job_eff["cpu_eff"].hist(
@@ -194,6 +197,25 @@ def plot_job_eff(ax, df) -> pd.DataFrame:
     return job_eff
 
 
+def plot_time_eff(ax, df):
+    time_eff = df[
+        ~df.Timelimit.isnull() & ~df.State.isin(["PENDING", "RUNNING", "CANCELLED"])
+    ]
+    time_eff = time_eff[["User", "JobId", "Elapsed", "Timelimit"]]
+    time_eff["time_eff"] = 100 * (time_eff.Elapsed / time_eff.Timelimit)
+
+    time_eff["time_eff"].hist(
+        ax=ax,
+        bins=25,
+        range=(0, 100),
+        grid=False,
+        log=True,
+    )
+    ax.set_xlabel("Time Efficiency [%]")
+    ax.set_ylabel("Job Count")
+    return time_eff
+
+
 if __name__ == "__main__":
     df = sacct()
     df.to_csv("sacct.csv")
@@ -203,7 +225,11 @@ if __name__ == "__main__":
     # Plot Wait Times
     plot_wait_times(axes[0, 0], df)
 
-    # Compute CPU Efficiency
+    # Plot Time Efficiencies
+    time_eff = plot_time_eff(axes[0, 1], df)
+    time_eff.to_csv("time_eff.csv")
+
+    # Compute CPU/Memory Efficiency
     job_eff = plot_job_eff(axes[1], df)
     job_eff.to_csv("job_eff_out.csv")
 
@@ -213,7 +239,7 @@ if __name__ == "__main__":
 
     # Get User Job Efficiency
     job_users = (
-        df[df.User.notnull() & df.Account.notnull()][["JobId", "User"]]
+        df[df.User.notnull()][["JobId", "User"]]
         .groupby("JobId")
         .aggregate(lambda x: x.unique()[0])
     )
@@ -221,15 +247,43 @@ if __name__ == "__main__":
     user_job_eff = user_job_eff.groupby("User").agg(
         {"CPUTime": "sum", "TotalCPU": "sum", "MaxRSS": "sum", "ReqMem": "sum"}
     )
-    user_job_eff["cpu_eff"] = 100 * (user_job_eff.TotalCPU / user_job_eff.CPUTime)
-    user_job_eff["mem_eff"] = 100 * (user_job_eff.MaxRSS / user_job_eff.ReqMem)
+    user_job_eff["cpu_eff"] = user_job_eff.TotalCPU / user_job_eff.CPUTime
+    user_job_eff["mem_eff"] = user_job_eff.MaxRSS / user_job_eff.ReqMem
+
+    # Get User Time Efficiency
+    user_time_eff = (
+        time_eff[~np.isinf(time_eff["Timelimit"])]
+        .groupby("User")
+        .agg({"Elapsed": "sum", "Timelimit": "sum"})
+    )
+    user_time_eff["time_eff"] = user_time_eff["Elapsed"] / user_time_eff["Timelimit"]
 
     # Write to markdown
-    user_job_eff = user_job_eff[["cpu_eff", "mem_eff"]]
-    user_job_eff.to_csv("user_job_eff.csv")
-    user_job_eff.sort_values("cpu_eff", ascending=False, inplace=True)
-    user_job_eff.rename(
-        columns={"cpu_eff": "CPU Eff. [%]", "mem_eff": "Memory Eff. [%]"}, inplace=True
+    user_stats = user_job_eff[["TotalCPU", "cpu_eff", "mem_eff"]]
+    user_stats = user_stats.merge(
+        user_time_eff["time_eff"],
+        how="outer",
+        left_index=True,
+        right_index=True,
     )
-    with open("user_job_eff.md", "w") as io:
-        user_job_eff.to_markdown(io, floatfmt=".1f", tablefmt="github")
+    user_stats.sort_values("TotalCPU", ascending=False, inplace=True)
+    user_stats["TotalCPU"] = user_stats["TotalCPU"].map(
+        lambda x: f"{x:8.3G}" if ~np.isnan(x) else ""
+    )
+    for k in user_stats.keys():
+        if "eff" in k:
+            user_stats[k] = user_stats[k].map(
+                lambda x: f"{x:3.1%}" if ~np.isnan(x) else ""
+            )
+    user_stats.rename(
+        columns={
+            "TotalCPU": "Core-hours",
+            "cpu_eff": "CPU Eff. [%]",
+            "mem_eff": "Memory Eff. [%]",
+            "time_eff": "Time Eff. [%]",
+        },
+        inplace=True,
+    )
+    user_stats.to_csv("user_stats.csv")
+    with open("user_stats.md", "w") as io:
+        user_stats.to_markdown(io, tablefmt="github")
