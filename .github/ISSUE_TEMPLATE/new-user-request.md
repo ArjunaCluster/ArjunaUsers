@@ -1,6 +1,6 @@
 ---
 name: New User Request
-about: Request Acces to Arjuna
+about: Request Access to Arjuna
 title: New User Request
 labels: admin-tasks
 assignees: ''
