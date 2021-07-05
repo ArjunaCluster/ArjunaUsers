@@ -11,19 +11,14 @@ If you notice a performance issue on arjuna, please first search the existing is
 Please provide the following information to help us help you:
 
 Your Name: 
-
 Your Andrew ID:
-
 Node(s) on which the problem occurred:
-
 Expected Behavior:
-
 Observed Behavior:
-
 Location of Log file Showing the Error:
-
 Location of Script showing [Minimum Working Example]:
 
+Please also attach any logs and the submission script to this issue.
 
 If you are not a frequent github user, please also provide us with a contact email here:
 Contact Email:
