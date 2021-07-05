@@ -12,12 +12,14 @@ Please provide the following information to help us help you:
 
 Your Name: 
 Your Andrew ID:
-Contact Email: 
 Node(s) on which the problem occurred:
 Expected Behavior:
 Observed Behavior:
 Location of Log file Showing the Error:
 Location of Script showing [Minimum Working Example]:
+
+If you are not a frequent github user, please also provide us with a contact email here:
+Contact Email:
 
 [Minimum Working Example]: https://en.wikipedia.org/wiki/Minimal_working_example 
 
