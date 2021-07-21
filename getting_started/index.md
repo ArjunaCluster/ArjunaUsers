@@ -5,7 +5,6 @@ nav_order: 2
 has_children: true
 
 ---
-
 # Getting Started
 
 This section contains documentation about connecting to Arjuna, submitting jobs
