@@ -12,4 +12,3 @@ Please provide the following information:
 Your Name:
 Your Andrew ID:
 Your Advisor's Name:
-Slurm Accounts or Name of User with the Same Slurm Accounts:
