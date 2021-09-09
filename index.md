@@ -9,6 +9,13 @@ nav_order: 1
 Arjuna is a multi-departmental CPU and GPU computing cluster. Here you can find
 documentation about what Arjuna is and how to use it.
 
+## Requesting an Account
+
+New Users can request an account by filling out the [Arjuna Account Request Form].
+Requests are processed during the first two weeks of each semester.
+
+[Arjuna Account Request Form]: https://forms.gle/8P41KGs1kjJjat8x7
+
 ## Support
 
 If you encounter an issue using Arjuna, please [open an issue] and let us know.
