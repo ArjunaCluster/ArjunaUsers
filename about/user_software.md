@@ -33,7 +33,7 @@ reuses those tools when installing additional software via spack.
 
 For a full list of the currently installed spack packages run: `spack find`
 
-For more information see [Spack's Documentation](https://spack.readthedocs.io)
+For more information see [Spack Resources](../getting_started/linux.md#spack)
 
 ## Additional Software
 

@@ -65,3 +65,10 @@ to getting started with HPC.
 - [Quick Start User Guide](https://slurm.schedmd.com/quickstart.html)
 - [Slurm Command Summary Sheet](https://slurm.schedmd.com/pdfs/summary.pdf)
 - [Tutorials](https://slurm.schedmd.com/tutorials.html)
+
+## Spack
+
+- [Website](https://spack.io)
+- [Documentation](https://spack.readthedocs.io/en/latest/)
+- [Tutorial](https://spack-tutorial.readthedocs.io/en/latest/)
+- [Slack](https://slack.spack.io)
