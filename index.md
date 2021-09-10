@@ -9,10 +9,6 @@ nav_order: 1
 Arjuna is a multi-departmental CPU and GPU computing cluster. Here you can find
 documentation about what Arjuna is and how to use it.
 
-## Requesting an Account
-
-New Users can request an account by [open an issue] on Github.
-
 ## Support
 
 If you encounter an issue using Arjuna, please [open an issue] and let us know.

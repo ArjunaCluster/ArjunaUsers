@@ -31,17 +31,6 @@ you can then `ssh` into Arjuna.
 
 [CMU's VPN]: https://www.cmu.edu/computing/services/endpoint/network-access/vpn/how-to/
 
-### Setting your Password
-
-Passwords must meet the following minimum requirements:
-
-- At least 10 Characters
-- At least character from the following types: Numbers, Upper Case, Lower Case, Special
-
-Passwords must be changed every 90 days, you will receive a warning 14 days before
-your password expires. You have an additional 90 day to change your password, after
-which your account *will be marked inactive.*
-
 ## Configuring SSH
 
 The following steps are quality-of-life improvements to default ssh configuration.
