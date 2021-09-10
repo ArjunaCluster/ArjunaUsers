@@ -52,21 +52,21 @@ Collectively, these tasks form a single *Job* that requires a certain amount of 
 
 > We could also split these tasks across several jobs, or use a [Heterogeneous Job](https://slurm.schedmd.com/heterogeneous_jobs.html), to tailor our requests for each job step.
 
-The user submits this *job* to a particular *partition* that can satisfy the job's computing needs. As this job requires a GPU, it needs a partition with GPUs (i.e., `gpu`). Other jobs may need lots of memory or a longer run time and should be submitted accordingly. For more information about Arjuna's partitions see [Cluster Architecture]({{site.baseurl}}{% link about/hardware.md %}).
+The user submits this *job* to a particular *partition* to satisfy the job's computing needs. This job requires a GPU, and it needs a partition with GPUs (i.e., `gpu`). Other jobs may need lots of memory or a longer run time and should be submitted accordingly. For more information about Arjuna's partitions see [Cluster Architecture]({{site.baseurl}}{% link about/hardware.md %}).
 
-Once submitted to a *partition*, the *Job* waits in the Slurm queue until Slurm releases it to run on one or more *nodes*. Slurm releases jobs based their priority, which is currently based on a user's [fair share](https://slurm.schedmd.com/fair_tree.html), with users using less than their "fair share" having a higher priority than users using more than their "fair share."
+Once submitted to a *partition*, the *Job* waits in the Slurm queue until Slurm releases it to run on one or more *nodes*. Slurm releases jobs based on their priority computed from the user's [fair share](https://slurm.schedmd.com/fair_tree.html).  Users using less than their "fair share" have a higher priority than users using more than their "fair share."
 
-Carefully crafting the resources requested by a job ensures that the job is submitted as soon as possible and does not get delayed waiting for resources that it does not need.
+Carefully crafting the resources requested by a job ensures that it is submitted as soon as possible and does not get delayed waiting for resources that it does not need.
 
 ## Accounting
 
-Usage on Slurm is billed based on [Trackable RESources (TRES)](https://slurm.schedmd.com/tres.html). Currently, using 1 CPU for 1 hour consumes 1 TRES-hour. A job that used 32 CPUs for 2 hours would be billed 64 TRES-hours (32 * 2 = 64).
+Usage on Slurm is billed based on [Trackable RESources (TRES)](https://slurm.schedmd.com/tres.html). Currently, using 1 CPU for 1 hour consumes 1 TRES-hour. A job that used 32 CPUs for 2 hours is billed for 64 TRES-hours (32 * 2 = 64).
 
-Memory is billed based on the number of CPUs on the node divided by the total memory. Jobs may use up to this amount at no additional cost but are billed additional TRES above this limit. For example, on the `cpu` partition, each CPU gets 0.435GiB of memory. A Job that requests 2 CPUs and 512MiB of memory would be billed 2 TRES per hour (max(2,  0.5 * 0.435) = 2).
+Memory is billed based on the number of CPUs on the node divided by the total memory. Jobs may use up to this amount at no additional cost but are billed additional TRES above this limit. For example, on the `cpu` partition, each CPU gets 0.435GiB of memory. A Job that requests 2 CPUs and 512MiB of memory is billed 2 TRES per hour (max(2, 0.5 * 0.435) = 2).
 
-> Slurm uses a system of units based on a power of 2 not 10. Thus 1G of memory is 1,073,741,824 bytes, not 1,000,000,000 bytes
+> Slurm uses a system of units based on a power of 2, not 10. Thus 1G of memory is 1,073,741,824 bytes, not 1,000,000,000 bytes
 
-This usage is then billed to the user's default account. To see your accounts run `sacctmgr show user $(whoami) WithAssoc`
+This usage is billed to the user's default account. To see your accounts run `sacctmgr show user $(whoami) WithAssoc`
 
 ```
 sacctmgr show user $(whoami) WithAssoc WOPLimits
@@ -78,9 +78,9 @@ sacctmgr show user $(whoami) WithAssoc WOPLimits
       jdoe    example     None     arjuna     example      debug         1
 ```
 
-Here we can see that `jdoe` has a default account of `example` and can submit jobs to the `highmem`, `cpu`, `idle` and `debug` partitions. As our user `jdoe` does not have an entry for the `gpu` partition, they can not submit to the `gpu` partition.
+Here we can see that `jdoe` has `example` as their default account and can submit jobs to the `highmem`, `cpu`, `idle` and `debug` partitions. Our user `jdoe` does not have an entry for the `gpu` partition, so they can not submit to the `gpu` partition.
 
-In order to submit to the `cpu` partition, `jdoe` would needs to use their `example-2` account, they can not submit to `cpu` using their default account. The `--account` flag is used to change accounts, see [sbatch](https://slurm.schedmd.com/sbatch.html) for more information.
+To submit to the `cpu` partition, `jdoe` needs to use their `example-2` account. They can not submit to `cpu` using their default account. Use the `--account` flag to change the account used to submit a job. See [sbatch](https://slurm.schedmd.com/sbatch.html) for more information.
 
 ## Additional Resources
 

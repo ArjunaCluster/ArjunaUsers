@@ -17,9 +17,10 @@ For more information, see [Lmod's documentation](https://lmod.readthedocs.io).
 
 ## Spack
 
-Arjuna uses [`spack`](https://spack.io) to install and manage the commonly provided
-software. Spack is a package manager for supercomputers that makes installing
-scientific software easy, and tuning installs for a particular machine.
+[Spack](https://spack.io) is a package manager for supercomputers that makes
+installing scientific software easy, and tuning installs for a particular
+machine. Arjuna uses spack to install and manage the software provided
+via modules.
 
 You can install any of spack's 5843 (and counting) packages by running:
 
