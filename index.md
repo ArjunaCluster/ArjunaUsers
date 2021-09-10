@@ -4,10 +4,6 @@ layout: default
 nav_order: 1
 ---
 
-> Maintenance: Arjuna is currently down for scheduled maintenance from 
-> August 23 to August 30th. We will notify users via the listserve when Arjuna has
-> been returned to service.
-
 # Welcome!
 
 Arjuna is a multi-departmental CPU and GPU computing cluster. Here you can find
