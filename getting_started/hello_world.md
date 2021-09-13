@@ -2,7 +2,7 @@
 title: Your First Job
 layout: default
 parent: Getting Started
-nav_order: 2
+nav_order: 3
 ---
 
 # Submitting Your First Job

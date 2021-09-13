@@ -2,7 +2,7 @@
 layout: default
 title: Other Resources
 parent: Getting Started
-nav_order: 3
+nav_order: 4
 ---
 
 # Other Resources
@@ -61,3 +61,14 @@ to getting started with HPC.
 [PSC's Getting Started with HPC]: https://www.psc.edu/resources/bridges-2/getting-started-with-hpc/
 
 **[SLURM](https://slurm.schedmd.com/):** SLURM's Documentations
+
+- [Quick Start User Guide](https://slurm.schedmd.com/quickstart.html)
+- [Slurm Command Summary Sheet](https://slurm.schedmd.com/pdfs/summary.pdf)
+- [Tutorials](https://slurm.schedmd.com/tutorials.html)
+
+## Spack
+
+- [Website](https://spack.io)
+- [Documentation](https://spack.readthedocs.io/en/latest/)
+- [Tutorial](https://spack-tutorial.readthedocs.io/en/latest/)
+- [Slack](https://slack.spack.io)
