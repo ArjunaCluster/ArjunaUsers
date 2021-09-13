@@ -7,7 +7,7 @@ nav_order: 1
 
 Slurm or, the "Simple Linux Utility for Resource Management," is a software package for
 submitting computing workloads to a shared computer cluster. Additionally,
-Slurm provides tools for managing job priority so that computational resources
+Slurm provides tools for managing job priority so that computational resources are split fairly among users.
 
 ![SLURM Architecture](https://slurm.schedmd.com/arch.gif)
 

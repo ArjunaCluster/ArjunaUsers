@@ -17,12 +17,7 @@ ssh andrewID@arjuna.psc.edu
 As Arjuna is on the CMU network, the above command will only work if you are also
 connected to the CMU Network (i.e. you are on campus).
 
-When you login to Arjuna, you will be prompted for a password:
-
-1. Enter the password given to you by the Administrator who created your account.
-2. Change your password using `passwd`
-
-On subsequent logins, use your newly set password.
+When you first login to Arjuna, you will be prompted for a password.  Enter the password given to you by the Administrator who created your account. You will be immediately required to change it. 
 
 ### Accessing Arjuna via CMU's VPN
 
