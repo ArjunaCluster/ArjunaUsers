@@ -45,7 +45,7 @@ Arjuna has the following compute nodes available for usage
 
 Arjuna has 20 TB of [RAID 6] storage.
 
-> Arjuna's RAID Storage is not for long-term storage of data. Please use other resources, such as CMU's unlimited google drive access, to store data for long term.
+> Arjuna's RAID Storage is not meant for long-term storage of data. For long-term data storage, please use other resources such as CMU's unlimited google drive access.
 
 [RAID 6]: https://en.wikipedia.org/wiki/Standard_RAID_levels#RAID_6
 
