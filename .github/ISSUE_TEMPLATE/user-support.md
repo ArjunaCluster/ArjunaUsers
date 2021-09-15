@@ -14,9 +14,6 @@ Please provide the following information to help us help you:
 Your Name: 
 Your Andrew ID:
 
-If you are not a frequent github user, please also provide us with a contact email here:
-Contact Email:
-
 ## Where it happened
 Job Ids:
 Node(s) on which the problem occurred:
