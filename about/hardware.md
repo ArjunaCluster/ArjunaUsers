@@ -33,7 +33,7 @@ If the desired compute task is anything other than trivial operations required f
 
 ## Partitions
 
-Jobs can be submitted to one of the following partitions using `-p` or
+Partition can be specified by passing the `-p` or
 `--partition` flag to `srun`, `sbatch` or `salloc`. By default jobs are submitted
 to the *debug* partition.
 
