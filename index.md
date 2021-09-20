@@ -16,9 +16,6 @@ We will do our best to get it sorted out.
 
 [open an issue]: https://github.com/ArjunaCluster/ArjunaUsers/issues/
 
-If you are having trouble and want to talk to someone, we recommend sending
-an email to the list server: <arjuna-users@lists.andrew.cmu.edu>.
-
 ## Contributing
 
 Thank you for wanting to contribute to Arjuna's Documentation! We recommend you
