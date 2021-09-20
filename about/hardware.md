@@ -31,15 +31,36 @@ Authorized uses of the Head Node include, but are not limited to:
 
 If the desired compute task is anything other than trivial operations required for job submission, which can only be run on the Head Node of Arjuna, it should be run on a worker node or elsewhere.
 
-## Compute Nodes
+## Partitions
 
-Arjuna has the following compute nodes available for usage
+Jobs can be submitted to one of the following partitions using `-p` or
+`--partition` flag to `srun`, `sbatch` or `salloc`. By default jobs are submitted
+to the *debug* partition.
 
-| Partition | Count | Cores | Memory | GPUs         | Tmp Storage | Node Names                         |
-|-----------|-------|-------|--------|--------------|-------------|-------------––---------------------|
-| cpu       | 58    | 56    | 128 GB |              | 100 GB      | d[001-032],f[001-024],e[001-002]   |
-| highmem   | 2     | 32    | 512 GB |              | 100 GB      | e[003-004]                         |
-| gpu       | 27    | 64    | 128 GB | 4 K80 NVIDIA | 100 GB      | c[002-028]                         |
+Unless otherwise specified, jobs have a max runtime of 1 day and receive 1GB of
+memory per requested CPU. See [Allocating Resources] for more information.
+
+[Allocating Resources]: ../getting_started/slurm_intro.html#allocating-resources
+
+| Partition | Count | Cores | Memory | Tmp Storage | Max Time |
+|-----------|-------|-------|--------|-------------|----------|
+| cpu       | 58    | 56    | 128 GB | 100 GB      | 7 days   |
+| highmem   | 2     | 32    | 512 GB | 100 GB      | 7 days   |
+| gpu       | 27    | 64    | 128 GB | 100 GB      | 14 days  |
+| debug     | 2     | 64    | 128 GB | 100 GB      | 10 minutes |
+
+For more information on the partitions and their default settings run
+`scontrol show partitions` on Arjuna.
+
+### GPU Nodes
+
+Each GPU Nodes has 4 [K80 NVIDIA GPUs] available for usage. To request a gpu, use
+the `--gres=gpu:N` flag, where `N` is the number of GPUs requested.
+
+[K80 NVIDIA GPUs]: https://www.nvidia.com/en-gb/data-center/tesla-k80/
+
+See [Generic Resource Scheduling](https://slurm.schedmd.com/gres.html) for more
+information about requesting GPUs.
 
 ## Storage
 
