@@ -63,7 +63,13 @@ See [Generic Resource Scheduling](https://slurm.schedmd.com/gres.html) for more
 information about requesting GPUs.
 
 ### Internet Access
-Worker nodes do not have access to the internet and thus can not download files from the internet or external servers.
+Workers can not resolve [domain names](https://en.wikipedia.org/wiki/Domain_name) and as a result most internet services may not function correctly. For example,
+
+- Cloning a git repository from [github.com]()
+- Downloading packages using `spack`, `pip`, `conda` or `Pkg.jl`
+- Downloading files with `wget`, `rclone` or `curl` from the Internet
+
+Users are encoraged to use the [Head Node](#head-node) for these tasks. 
 
 ## Storage
 
