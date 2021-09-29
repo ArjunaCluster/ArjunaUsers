@@ -62,6 +62,9 @@ the `--gres=gpu:N` flag, where `N` is the number of GPUs requested.
 See [Generic Resource Scheduling](https://slurm.schedmd.com/gres.html) for more
 information about requesting GPUs.
 
+### Internet Access
+Worker nodes do not have access to the internet and thus can not download files from the internet or external servers.
+
 ## Storage
 
 Arjuna has 20 TB of [RAID 6] storage.
