@@ -1,0 +1,64 @@
+name: New User Request
+description: Request Access to Arjuna
+title: New User Request
+labels:
+  - "admin-tasks"
+
+body:
+  - type: input
+    attributes:
+      label: Andrew ID
+      description: "Enter your AndrewID"
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Group Name
+      description: "What group are you in?"
+      options:
+        - "Venkat Viswanathan"
+        - "Noa Marom"
+        - "Zachary Ulissi"
+        - "Amir Barati Farimani"
+        - "Other"
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Group Name (Other)
+      description: "If Other, what is your advisor's AndrewID?"
+  - type: markdown
+    attributes:
+      value: |
+        ## Arjuna Mailing List
+        We use the Arjuna-users mailing list to disseminate important information related to maintenance windows, service interruptions or changes in policy.
+        You can request an account here: [https://lists.andrew.cmu.edu/mailman/listinfo/arjuna-users]()
+  - type: dropdown
+    attributes:
+      label: "Are you subscribed to arjuna-users@lists.andrew.cmu.edu?"
+      options:
+        - "Yes, or I have requested access to the list serve"
+        - "No, and I acknowledge that I am may miss out on critical information"
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        ## Emails from root@coe.psc.edu
+        Automated emails regarding disk usage, account creation/deactivation/termination are sent by `root@coe.psc.edu`. Some email providers may mark these emails as spam, consider adding a rule to prevent this.
+  - type: dropdown
+    attributes:
+      label: "I will not block emails from root@coe.psc.edu"
+      options:
+        - "Yes"
+        - "No, and I acknowledge that I may miss out on critical information"
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        ## Next steps
+        You will receive an email from `the Arjuna Admins <root@coe.psc.edu` with your login information in 10 business days.
+        If you do not, please comment on this issue, ***do not open another issue***
+
+        In the meantime, checkout our documentation [https://arjunacluster.github.io/ArjunaUsers/]()
