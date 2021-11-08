@@ -68,4 +68,7 @@ The `-P` flag isn't necessary, but it will give you progress updates. You may ge
 Note that for your first backup, if you have a lot of stuff in your directory, it may take a long time to run, and could get interrupted if your internet connection cuts out. `tmux` is a useful tool to get around this and keep tasks running even if you disconnect (many good tutorial easily found on Google).
 
 ### Scheduling backups
-add some stuff about how to do it with a cron job
+An easy "set-it-and-forget-it" approach for backups is to schedule them using cron jobs. A simple setup for this can be achieved by:
+1. Write a bash script to run `rclone` on whatever files/directories you'd like to sync. Let's assume this is called `backup.sh` (the simplest version would be a single-line script containing only the command above to sync your entire home directory, but you could include multiple lines to, for example, skip directories containing only large number of data files and instead sync a single tarball containing these files).
+2. Run the command `crontab -e` to open your cron table, this should open a file in your editor which will be blank if you've never used cron before.
+3. Add a line like `0 2 * * * /home/username/backup.sh` to this file, replacing the path with the appropriate path to your backup script. This line will run the backup every day at 2am. For syntax of these schedulers, see e.g. [this page](https://crontab.guru).
