@@ -16,26 +16,38 @@ If you just need to move a single file/directory onto/off of Arjuna, the easiest
 
 ```bash
 # copy a file from arjuna to local machine
-scp username@arjuna.psc.edu:/home/username/src_dir/myfile ~/dest_dir/
+scp username@arjuna.psc.edu:~/src_dir/myfile ~/dest_dir/
 
 # copy a file from local machine to arjuna
-scp myfile username@arjuna.psc.edu:/home/username/dest_dir/
+scp myfile username@arjuna.psc.edu:~/dest_dir/
 ```
 
-(It may be useful to set up aliases to avoid having to type out the full locations)
+---
+**NOTE**
+
+Note that you can shorten these commands somewhat if you've set up an [SSH config file].
+
+---
+
+
+[SSH config file]: ../getting_started/connecting.md#using-a-ssh-config-file
 
 ## Managing code: GitHub
-For scripts and other code, version control via git and cloud syncing to GitHub is a good solution. Many good tutorials on this can be found via Google.
+For scripts and other code, version control via [git] and cloud syncing to [GitHub] is a good solution. Many good tutorials on this can be found via Google, and we've suggested some [over here] as well.
+
+[git]: https://git-scm.com
+[GitHub]: https://github.com
+[over here]: ../getting_started/linux.md#git
 
 ## Other data
 Suppose you want to back up the entire contents of your home directory. You could periodically `scp -r` to a location on your local machine. However, this is inefficient as many files may not have changed at all, and also may use up more local disk space than you'd like. Both of these issues can be ameliorated by other solutions:
 * The `rsync` command is similar to `scp`, but it will compare sizes and modification times of files to _only copy files that have been updated_. Basic syntax is `rsync source destination`
 * `rclone` is similar to `rsync`, but allows syncing files with cloud storage services such as Google Drive or Box
 
-An easy, "set-it-and-forget-it" solution to periodically back up your entire home directory to a cloud service using `rclone`. As a CMU affiliate, you get access to unlimited storage space on Google Drive as well as 1TB on Box. The next sections detail how to configure these as remotes for `rclone`, as well as setting up a cron job to automatically run backups for you on a schedule.
+An easy, "set-it-and-forget-it" solution to periodically back up your entire home directory to a cloud service using [`rclone`](https://rclone.org). As a CMU affiliate, you get access to unlimited storage space on Google Drive as well as 1TB on Box. The next sections detail how to configure these as remotes for `rclone`, as well as setting up a cron job to automatically run backups for you on a schedule.
 
 ### Setting up `rclone` remotes
-`rclone` requires configuraiton of remote destinations to which it can sync files. It comes with an interactive walkthrough for setting these up. Start by running `rclone config`. The ensuing steps in the interactive prompt should look something like:
+`rclone` requires configuration of remote destinations to which it can sync files. It comes with an interactive walkthrough for setting these up. Start by running `rclone config`. The ensuing steps in the interactive prompt should look something like:
 1. Press `n` for a new config
 2. Enter a name for it, e.g. "Box" or "GDrive"
 3. Enter the number associated with the type of remote (as of 11/8/21, Box was 6 and Google Drive was 15)
@@ -71,4 +83,4 @@ Note that for your first backup, if you have a lot of stuff in your directory, i
 An easy "set-it-and-forget-it" approach for backups is to schedule them using cron jobs. A simple setup for this can be achieved by:
 1. Write a bash script to run `rclone` on whatever files/directories you'd like to sync. Let's assume this is called `backup.sh` (the simplest version would be a single-line script containing only the command above to sync your entire home directory, but you could include multiple lines to, for example, skip directories containing only large number of data files and instead sync a single tarball containing these files).
 2. Run the command `crontab -e` to open your cron table, this should open a file in your editor which will be blank if you've never used cron before.
-3. Add a line like `0 2 * * * /home/username/backup.sh` to this file, replacing the path with the appropriate path to your backup script. This line will run the backup every day at 2am. For syntax of these schedulers, see e.g. [this page](https://crontab.guru).
+3. Add a line like `0 2 1 * * /home/username/backup.sh` to this file, replacing the path with the appropriate path to your backup script. This line will run the backup on the first of each month at 2am. For syntax of these schedulers, see e.g. [this page](https://crontab.guru).

@@ -102,4 +102,6 @@ find ~ -name `*.gpw` -delete
 
 User data stored on Arjuna is **NOT** backed up, users are responsible for backing up
 their data. We recommend using [`rclone`](https://rclone.org) to regularly
-transfer data from Arjuna to an alternate location.
+transfer data from Arjuna to an alternate location. See [Data Backup] for guidance on this.
+
+[Data Backup]: ../getting_started/data_backup.html
