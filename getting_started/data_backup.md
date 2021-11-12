@@ -86,7 +86,7 @@ The `-P` flag isn't necessary, but it will give you progress updates. You may ge
 
 Note that for your first backup, if you have a lot of stuff in your directory, it may take a long time to run, and could get interrupted if your internet connection cuts out. `tmux` is a useful tool to get around this and keep tasks running even if you disconnect (many good tutorial easily found on Google).
 
-### Automated Backups
+## Automated Backups
 
 A generic cron job to run backups is provided below, to use it do the following:
 
@@ -101,7 +101,7 @@ A generic cron job to run backups is provided below, to use it do the following:
 > Users are responsible for backing up their data, verifying their backups,
 > and the operation of any backup scripts. *INCLUDING THIS ONE*!
 
-#### Contents of `~/backup.sh`
+### Contents of `~/backup.sh`
 
 ```bash
 #!/bin/bash
@@ -145,7 +145,12 @@ rclone sync -P ~ gdrive-cmu:arjuna_backup --dry-run \
 
 ```
 
-#### Restrictions on Backups
+This will sync most files in your home directory (`~`) to `gdrive-cmu`.
+To sync other files, add or remove filters as needed.
+See [rclone filtering](https://rclone.org/filtering/) for more information on
+filters and how to use them.
+
+### Restrictions on Backups
 
 Please be cognizant of other users when configuring your backup scripts. Daily
 backups are *strongly discouraged* due to the strain it puts on the file system.
