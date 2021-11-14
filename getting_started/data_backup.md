@@ -51,7 +51,7 @@ git clone git@github.com:ArjunaCluster/ArjunaUsers.git
 
 See GitHub's instruction for connecting to [GitHub via ssh](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) for more information.
 
-Additional resources for git and GitHub can be found on our [Other Resources](./getting_started/linux.md#git) page.
+Additional resources for git and GitHub can be found on our [Other Resources](./linux.md#git) page.
 
 [git]: https://git-scm.com
 [GitHub]: https://github.com
