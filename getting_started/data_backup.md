@@ -9,93 +9,146 @@ nav_order: 4
 
 While data storage on Arjuna is [configured](../about/hardware.md#storage) to provide robustness against
 disk failure, [disaster can strike](https://lists.andrew.cmu.edu/mailman/private/arjuna-users/2021-September/000050.html).
-Users are responsible for **backing up their data reguarly**, _especially_
+Users are responsible for **backing up their data regularly**, _especially_
 things that take a lot of (human or computer) time to reproduce!
 This guide will cover transferring files to and from Arjuna and configuring automated backups.
-Users may need to use a variety methods to meet their backup/file transfer needs.
+Users may need to use a variety of methods to meet their backup/file transfer needs.
 
 > We **STRONGLY RECOMMEND** users configure [automated backups](#automated-backups)
 
+> Windows Users: `scp` and `rsync` are not installed by default on Windows.
+> You will need to install them manually or use [WSL](https://docs.microsoft.com/en-us/windows/wsl/about)
+
 [RAID]: https://en.wikipedia.org/wiki/RAID
 
-## Grabbing a single file: `scp`
+## Small Transfers: `scp`
 
-If you just need to move a single file/directory onto/off of Arjuna, the easiest approach is the `scp` command, which has identical syntax to `cp`, but for remote systems requires a full specification of the file's location, for example:
+For small transfers (< 1GB) on to or off of arjuna, the following `scp` commands an be used from *your local machine*.
+
+> Remember to replace `user` with your username
+
+| Action                    | Command                                             |
+| ------------------------- | --------------------------------------------------- |
+| Copy a File from Arjuna   | `scp user@arjuna.psc.edu:path/to/file path/to/dst`  |
+| Copy a File to Arjuna     | `scp path/to/file user@arjuna.psc.edu:path/to/dst`  |
+| Copy a Folder from Arjuna | `scp -r user@arjuna.psc.edu:path/to/folder path/to` |
+| Copy a Folder to Arjuna   | `scp -r path/to/folder user@arjuna.psc.edu:path/to` |
+
+Notice when copying folders, the destination folder is `/path/to` not `/path/to/folder`.
+`scp` will copy the folder to `/path/to` thus creating `/path/to/folder`; using a destination of `/path/to/folder` would result in `/path/to/folder/folder`.
+
+These commands can be shortened to `scp arjuna:/path/to/file /path/to/dst` by
+setting up an [SSH config file](../getting_started/connecting.md#using-a-ssh-config-file).
+To read the manual page for `scp`, type `man scp` into a terminal.
+
+## Managing Code
+
+Source code track by [git] can be transferred via [GitHub] directly via ssh:
 
 ```bash
-# copy a file from arjuna to local machine
-scp username@arjuna.psc.edu:~/src_dir/myfile ~/dest_dir/
-
-# copy a file from local machine to arjuna
-scp myfile username@arjuna.psc.edu:~/dest_dir/
+git clone git@github.com:ArjunaCluster/ArjunaUsers.git
 ```
 
-These commands can be shortened to `scp arjuna ~/src_dir/myfile ~/dest_dir/` by
-setting up an [SSH config file](../getting_started/connecting.md#using-a-ssh-config-file).
+See GitHub's instruction for connecting to [GitHub via ssh](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) for more information.
 
-## Managing code: GitHub
-
-For scripts and other code, version control via [git] and cloud syncing to [GitHub] is a good solution. Many good tutorials on this can be found via Google, and we've suggested some [over here] as well.
+Additional resources for git and GitHub can be found on our [Other Resources](./getting_started/linux.md#git) page.
 
 [git]: https://git-scm.com
 [GitHub]: https://github.com
-[over here]: ../getting_started/linux.md#git
 
-## Transferring Multiple Files
+## Larger Transfers: `rsync`
 
-Suppose you want to back up the entire contents of your home directory. You could periodically `scp -r` to a location on your local machine. However, this is inefficient as many files may not have changed at all, and also may use up more local disk space than you'd like. Both of these issues can be ameliorated by other solutions:
-* The `rsync` command is similar to `scp`, but it will compare sizes and modification times of files to _only copy files that have been updated_. Basic syntax is `rsync source destination`
-* `rclone` is similar to `rsync`, but allows syncing files with cloud storage services such as Google Drive or Box
+For larger file transfers (> 1GB or > 20 files), the following `rsync` commands an be used from *your local machine*.
 
-An easy, "set-it-and-forget-it" solution to periodically back up your entire home directory to a cloud service using [`rclone`](https://rclone.org). As a CMU affiliate, you get access to unlimited storage space on Google Drive as well as 1TB on Box. The next sections detail how to configure these as remotes for `rclone`, as well as setting up a cron job to automatically run backups for you on a schedule.
+> Remember to replace `user` with your username
 
-### Setting up `rclone` remotes
 
-`rclone` requires configuration of remote destinations to which it can sync files. It comes with an interactive walkthrough for setting these up. Start by running `rclone config`. The ensuing steps in the interactive prompt should look something like:
-1. Press `n` for a new config
-2. Enter a name for it, e.g. "Box" or "GDrive"
-3. Enter the number associated with the type of remote (as of 11/8/21, Box was 6 and Google Drive was 15)
-4. Now the procedure bifurcates a bit...
+| Action                    | Command                                             |
+| ------------------------- | --------------------------------------------------- |
+| Copy a File from Arjuna   | `rsync user@arjuna.psc.edu:path/to/file path/to/dst`  |
+| Copy a File to Arjuna     | `rsync path/to/file user@arjuna.psc.edu:path/to/dst`  |
+| Copy a Folder from Arjuna | `rsync -r user@arjuna.psc.edu:path/to/folder path/to` |
+| Copy a Folder to Arjuna   | `rsync -r path/to/folder user@arjuna.psc.edu:path/to` |
+
+Unlike `scp`, `rsync` checks files sizes and modification times to only transfer files that have changed. This is helpfully for several reasons:
+
+1. Resume interrupted transfers *without* repeating the entire transfer.
+2. Reduce transfer times by *skipping* already transferred files.
+
+To read the manual page for `rsync`, type `man rsync` into a terminal.
+
+## Transfers to Cloud Storage: `rclone`
+
+[`rclone`](https://rclone.org) can be used to transfer files to cloud storage providers (Google Drive, Box, Amazon S3, SFTP, [and more](https://rclone.org/overview/)). Unlike `scp` and `rsync`, `rclone` can be run from your local machine or arjuna but require additional configuration to operate.
+
+### Installation
+
+1. Download from the [rclone website](https://rclone.org/downloads/).
+2. Install with [homebrew](https://brew.sh/): `brew install rclone`
+
+### Configuring `rclone` Remotes
+
+`rclone` requires configuration of remote destinations ("Remotes") before it can sync files to them. To configures `rclone` use [`rclone config`](https://rclone.org/docs/#configure) to launch an interactive configuration tool. In general adding a new remote is as simple as:
+
+1. Press `n` for a new config.
+2. Enter a name for the new remote (e.g. "box_cmu" or "gdrive_cmu").
+3. Choosing the type of remote. (e.g. "Google Drive",  "Box", "S3", etc.).
+4. Set remote-specific options.
+5. Authenticate with the remote.
+
+We have provided additional instructions for [Google Drive](#google-drive) and [Box](#box), but official documentation can be found on the [rclone website](https://rclone.org/overview/), by clicking "Storage Systems" and choosing the appropriate storage system.
 
 #### Google Drive
 
-5. You should have gotten a link to [this page](https://rclone.org/drive/#making-your-own-client-id). Follow the instructions to create a client id. One gotcha here is that **you won't be able to do this while logged into your andrew.cmu.edu** GSuite account, because you won't have permissions to create a project in that organization, so make sure to do it with a personal Google ID. (Don't worry, you'll still be able to link it to your Andrew GDrive space later)
-6. You should eventually get a client ID and secret that you can paste into the `rclone` prompt to continue configuring.
-7. Provide full access (option 1) at the `scope` prompt.
-8. Continue with default options until the question "Use auto config?" Because we are on a remote machine, you should enter `n` for this.
-9. You will get a link at which you should authenticate with your Google account. **At this step, be sure to use your Andrew account if that's where you want to back up!"** You may get a warning, proceed anyway (in a Chrome browser, by clicking Advanced and then "go to rclone").
-10. After authenticating, copy the code and paste into the rclone prompt.
-11. From here, you should be able to continue with default options and finish configuring! Phew!
+After completing [steps 1 - 3 above](#configuring-rclone-remotes): you will be prompted to enter a [`client_id`](https://rclone.org/drive/#making-your-own-client-id)
+
+1. When prompted from a [`client_id`](https://rclone.org/drive/#making-your-own-client-id), flow the instruction on the linked page.
+    - *You must use a non-CMU account* due to institutional restrictions.
+    - You *can* use this client id to sync with your Andrew GDrive account.
+    - You can skip this step, but performance may be limited.
+
+2. Paste your `client_id` and then `secret` when prompted by `rclone configure`.
+3. The default options are fine until reaching:
+4. For "Use auto config?" enter `n` if configuring rclone on arjuna (Or another headless machine). Otherwise, enter `y`
+5. Open the link in a browser (If you entered `y` above a browser window should open).
+    - Choose the Google account where you want to back up (Ie. your Andrew Account).
+    - If using a personal client id, you may get a warning that "Google hasn't verified this app", click "Continue".
+
+6. After authenticating, copy the code and paste it into the rclone prompt.
+7. The remaining defaults should be fine.
 
 #### Box
 
-5. Follow default options until the "use auto config?" prompt. Because we are on a remote machine, you should enter `n` for this.
-6. You will then need to open a local terminal session to access your web browser for authentication. Follow the instructions to do so.
-7. After authentication, on your local terminal, you should get something to paste into your remote session. Make sure to copy everything between the arrows.
-8. Follow defaults to finish configuration.
+1. The default options are fine until reaching:
+2. For "Use auto config?" enter `n` if configuring rclone on arjuna (Or another headless machine). Otherwise, enter `y`.
+3. Follow the instructions to authenticate with Box.
+4. The remaining defaults should be fine.
 
-### Running an `rclone` backup
+### Syncing Files with `rclone`
 
-You will probably want to create a folder on your remote (GDrive or Box) in which your backups will live. Let's suppose you've done that and it's called `arjuna_backup`, and that the name of your remote is `gdrive_cmu` (if you don't remember what you called it, run `rclone listremotes`).
+To [sync](https://rclone.org/commands/rclone_sync/) a folder to a remote destination, use the `rclone sync` command:
 
-Assuming you are in your home directory and you want to back up the entire thing, the syntax would then be
 ```bash
-rclone sync -P . my_remote:arjuna_backup
-```
-The `-P` flag isn't necessary, but it will give you progress updates. You may get a bunch of warnings about symlinks not being copied.
+# Local (Or from a teminal on Arjuna) to Remote
+rclone sync -P path/to/folder remote:path/to/folder
 
-Note that for your first backup, if you have a lot of stuff in your directory, it may take a long time to run, and could get interrupted if your internet connection cuts out. `tmux` is a useful tool to get around this and keep tasks running even if you disconnect (many good tutorial easily found on Google).
+# Remote to Local (Or from a teminal on Arjuna)
+rclone sync -P remote:path/to/folder path/to/folder
+```
+
+The `-P` flag is used to enable progress reporting and will display real-time progress statistics. You may get a bunch of warnings about symlinks not being copied. To copy symlinked files and folders, use the `--copy-links` flag.
 
 ## Automated Backups
 
 A generic cron job to run backups is provided below, to use it do the following:
 
-1. Create a file `~/backup.sh` with the indicated contents.
-2. Run `crontab -e`
-3. In the editor that opens, add the following line to the bottom of the file:
+1. Configure [rclone](#transfers-to-cloud-storage-rclone) for your cloud storage provider on Arjuna.
+2. Create a file `~/backup.sh` with the [indicated contents](#contents-of-backupsh). Remember to replace `remote` with the name of your remote
+3. Run `crontab -e`
+4. In the editor that opens, add the following line to the bottom of the file:
    `0 0 1 * * bash ~/backup.sh`
-4. Trigger the first backup manually: `bash ~/backup.sh`
-5. The next back will occur at 0:00 on the first day of the month.
+5. Trigger the first backup manually: `bash ~/backup.sh`
+6. The next back will occur at 0:00 on the first day of the month.
    *CHECK THAT THIS IS HAPPENS!*
 
 > Users are responsible for backing up their data, verifying their backups,
@@ -117,15 +170,15 @@ A generic cron job to run backups is provided below, to use it do the following:
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# Replace "my_remote" with the name of your remote
+# Replace "remote" with the name of your remote (i.e. gdrive_cmu)
 # Replace "arjuna_backup" with the name of the folder you want to backup to on
 # your remote
 # Add additional filters (See https://rclone.org/filtering/) as needed
 # NOTE: Be sure to "quote" your filters and append each line with "\"
 #
 # To "Dry Run" syncing (And quickly check what will be synced), replace the
-# first line with: `rclone sync -P --dry-run gdrive-cmu:arjuna_backup \`
-rclone sync -P ~ gdrive-cmu:arjuna_backup --dry-run \
+# first line with: `rclone sync -P --dry-run remote:arjuna_backup \`
+rclone sync -P ~ remote:arjuna_backup --dry-run \
     --ignore-case \
     --filter "- /.cache/**" \
     --filter "- /.bash_history" \
@@ -145,7 +198,7 @@ rclone sync -P ~ gdrive-cmu:arjuna_backup --dry-run \
 
 ```
 
-This will sync most files in your home directory (`~`) to `gdrive-cmu`.
+This will sync most files in your home directory (`~`) to `remote`.
 To sync other files, add or remove filters as needed.
 See [rclone filtering](https://rclone.org/filtering/) for more information on
 filters and how to use them.
@@ -154,7 +207,7 @@ filters and how to use them.
 
 Please be cognizant of other users when configuring your backup scripts. Daily
 backups are *strongly discouraged* due to the strain it puts on the file system.
-Please try to keep automated backups to within the following limits:
+Please try to keep automated backups within the following limits:
 
 | Backup Rate | Max Backup Size [GB] |
 | ----------- | -------------------- |
@@ -162,6 +215,6 @@ Please try to keep automated backups to within the following limits:
 | Weekly      | 45                   |
 | Monthly     | 150                  |
 
-> This is intended to be a guideline for *automated* backups, and not one time
-> transfers of data. Excessive backups puts strain on the file system and *may be
+> This is intended to be a guideline for *automated* backups, and not one-time
+> transfers. Excessive backups put unnecessary strain on the file system, and *may be
 > throttled*.
