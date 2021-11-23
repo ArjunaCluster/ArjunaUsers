@@ -191,8 +191,8 @@ at 0:00 on the first day of the month (`0 0 1 * *`), and pipe the output to
 # NOTE: Be sure to "quote" your filters and append each line with "\"
 #
 # To "Dry Run" syncing (And quickly check what will be synced), replace the
-# first line with: `rclone sync -P --dry-run remote:arjuna_backup \`
-rclone sync -P ~ remote:arjuna_backup/current \
+# first line with: `rclone sync --dry-run remote:arjuna_backup \`
+rclone sync ~ remote:arjuna_backup/current \
     --backup-dir remote:"arjuna_backup/snapshot-$(date +%Y-%m-%d)" \
     --ignore-case \
     --filter "- /.cache/**" \
