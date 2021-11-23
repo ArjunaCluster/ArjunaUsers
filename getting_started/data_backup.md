@@ -149,7 +149,7 @@ A generic cron backup script is provided below; to use it, do the following:
 2. Create a file `~/backup.sh` with the [indicated contents](#contents-of-backupsh). Remember to replace `remote` with the name of your remote
 3. Run `crontab -e`
 4. In the editor that opens, add the following line to the bottom of the file:
-   `0 0 1 * * bash ~/backup.sh > ~/backup.log`
+   `0 0 1 * * bash ~/backup.sh > ~/backup.log 2>&1`
 5. Trigger the first backup manually: `bash ~/backup.sh`
 6. The next back will occur at 0:00 on the first day of the month.
    *CHECK THAT THIS HAPPENS!*
@@ -159,9 +159,9 @@ A generic cron backup script is provided below; to use it, do the following:
 
 ### Cron
 
-`0 0 1 * * bash ~/backup.sh > ~/backup.log` tells `crond` to run a command (`bash ~/backup.sh`)
-at 0:00 on the first day of the month (`0 0 1 * *`), and pipe the output to
-`~/backup.log` For more information, on cron:
+`0 0 1 * * bash ~/backup.sh > ~/backup.log 2>&1` tells `crond` to run a command (`bash ~/backup.sh`)
+at 0:00 on the first day of the month (`0 0 1 * *`), and pipe both [stderr and
+stdout](https://en.wikipedia.org/wiki/Standard_streams) to `~/backup.log` For more information, on cron:
 
 - See the man pages: `man cron`
 - *Highly recommend*: [crontab guru](https://crontab.guru)
