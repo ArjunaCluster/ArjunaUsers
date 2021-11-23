@@ -2,7 +2,7 @@
 layout: default
 title: Other Resources
 parent: Getting Started
-nav_order: 4
+nav_order: 5
 ---
 
 # Other Resources

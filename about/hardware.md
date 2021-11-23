@@ -69,7 +69,7 @@ Workers can not resolve [domain names](https://en.wikipedia.org/wiki/Domain_name
 - Downloading packages using `spack`, `pip`, `conda` or `Pkg.jl`
 - Downloading files with `wget`, `rclone` or `curl` from the Internet
 
-Users are encoraged to use the [Head Node](#head-node) for these tasks. 
+Users are encoraged to use the [Head Node](#head-node) for these tasks.
 
 ## Storage
 
@@ -100,6 +100,8 @@ find ~ -name `*.gpw` -delete
 
 ### Backing up Data
 
-User data stored on Arjuna is **NOT** backed up, users are responsible for backing up
-their data. We recommend using [`rclone`](https://rclone.org) to regularly
-transfer data from Arjuna to an alternate location.
+User data stored on Arjuna is **NOT** backed up by the Arjuna Admin Team.
+Users are responsible for backing up their data. See [Data Backup] for additional
+guidance.
+
+[Data Backup]: ../getting_started/data_backup.html
