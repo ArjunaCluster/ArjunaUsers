@@ -178,11 +178,14 @@ A generic cron job to run backups is provided below, to use it do the following:
 #
 # To "Dry Run" syncing (And quickly check what will be synced), replace the
 # first line with: `rclone sync -P --dry-run remote:arjuna_backup \`
-rclone sync -P ~ remote:arjuna_backup --dry-run \
+rclone sync -P ~ remote:arjuna_backup/current \
+    --backup-dir gdrive-cmu:"arjuna_backup/snapshot-$(date +%Y-%m-%d)" \
     --ignore-case \
     --filter "- /.cache/**" \
     --filter "- /.bash_history" \
     --filter "- .git/**" \
+    --filter "+ .ssh/config" \
+    --filter "- .ssh/**" \
     --filter "- .spack-env/**" \
     --filter "+ .spack/*.yml" \
     --filter "- .spack/**" \
@@ -198,7 +201,9 @@ rclone sync -P ~ remote:arjuna_backup --dry-run \
 
 ```
 
-This will sync most files in your home directory (`~`) to `remote`.
+This will sync most files in your home directory (`~`) to
+`remote:arjuna_backup/current` and copy historical snapshots to `remote:arjuna_backup/snapshot-YYYY-MM-DD`
+using [`--backup-dir](https://rclone.org/docs/#backup-dir-dir).
 To sync other files, add or remove filters as needed.
 See [rclone filtering](https://rclone.org/filtering/) for more information on
 filters and how to use them.
