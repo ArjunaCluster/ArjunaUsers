@@ -193,7 +193,7 @@ at 0:00 on the first day of the month (`0 0 1 * *`), and pipe the output to
 # To "Dry Run" syncing (And quickly check what will be synced), replace the
 # first line with: `rclone sync -P --dry-run remote:arjuna_backup \`
 rclone sync -P ~ remote:arjuna_backup/current \
-    --backup-dir gdrive-cmu:"arjuna_backup/snapshot-$(date +%Y-%m-%d)" \
+    --backup-dir remote:"arjuna_backup/snapshot-$(date +%Y-%m-%d)" \
     --ignore-case \
     --filter "- /.cache/**" \
     --filter "- /.bash_history" \
