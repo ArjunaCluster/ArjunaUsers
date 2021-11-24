@@ -174,7 +174,7 @@ stdout](https://en.wikipedia.org/wiki/Standard_streams) to `~/backup.log` For mo
 #!/bin/bash
 # A script to back up user folders on Arjuna
 # For more information vist:
-# https://arjunacluster.github.io/ArjunaUsers/getting_started/lindata_backup.html
+# https://arjunacluster.github.io/ArjunaUsers/getting_started/data_backup.html
 
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
