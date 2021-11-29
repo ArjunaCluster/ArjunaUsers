@@ -191,7 +191,7 @@ stdout](https://en.wikipedia.org/wiki/Standard_streams) to `~/backup.log` For mo
 # NOTE: Be sure to "quote" your filters and append each line with "\"
 #
 # To "Dry Run" syncing (And quickly check what will be synced), replace the
-# first line with: `rclone sync --dry-run remote:arjuna_backup \`
+# first line with: `rclone sync ~ --dry-run remote:arjuna_backup/current \`
 rclone sync ~ remote:arjuna_backup/current \
     --backup-dir remote:"arjuna_backup/snapshot-$(date +%Y-%m-%d)" \
     --ignore-case \
