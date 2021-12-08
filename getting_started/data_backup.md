@@ -141,6 +141,10 @@ rclone sync -P remote:path/to/folder path/to/folder
 
 The `-P` flag is used to enable progress reporting and will display real-time progress statistics. You may get warnings about symlinks not being copied. To copy symlinked files and folders, use the `--copy-links` flag.
 
+Sometimes, `rclone` will take longer to back up than is practical to leave a terminal open on your computer. For these instances we recommend using a terminal multiplexer such as `tmux` or `screen`, both of which allow the user to detach from a terminal session. Do not attempt to back up via a slurm job!
+
+> This is only applicable for non-automated backups.
+
 ## Automated Backups
 
 A generic cron backup script is provided below; to use it, do the following:
