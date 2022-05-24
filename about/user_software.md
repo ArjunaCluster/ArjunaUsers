@@ -25,6 +25,10 @@ Users should load this module if they are using MPI. The following prior install
 > `/usr/local/mpirun` is on the `PATH` by default. However it is **not supported**, and will be removed in the future.
 > Users are __strongly__ encouraged to use `module load openmpi/4.1.3` instead.
 
+### PMI
+
+Support for PMI-2 on Arjuna is deprecated. Users are __strongly__ encouraged to use PMIx instead.
+
 ### Example MPI Job
 
 ```bash
