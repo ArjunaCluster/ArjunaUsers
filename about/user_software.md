@@ -14,43 +14,16 @@ To load a module named `module_name` run: `module load module_name`
 
 For more information, see [Lmod's documentation](https://lmod.readthedocs.io).
 
-## MPI
+## Additional Software
 
-Arjuna provides MPI support via the [OpenMPI](https://www.open-mpi.org/) module (`module load openmpi/4.1.3`).
-Users should load this module if they are using MPI. The following prior installations are deprecated:
+If you need additional software on Arjuna, we recommend installing it via spack. Many commonly used scientific and engineering packages are provided via the system-wide spack installation. For a full list of the currently installed spack packages run: `spack find`
 
-- `module load openmpi/4.1.1`
-- MPI Installation at `/usr/local/mpirun`
+If a spack package is not available for the software you need, install it from source or binaries.
 
-> `/usr/local/mpirun` is on the `PATH` by default. However it is **not supported**, and will be removed in the future.
-> Users are __strongly__ encouraged to use `module load openmpi/4.1.3` instead.
-
-### PMI
-
-Support for PMI-2 on Arjuna is deprecated. Users are __strongly__ encouraged to use PMIx instead.
-
-### Example MPI Job
-
-```bash
-#!/bin/bash
-#SBATCH -N 2
-
-module load openmpi/4.1.3
-srun hostname
-```
-
-### Known Issues
-
-| Issue | Workaround |
-|-------|-----------|
-| `mpirun` is not found | Use `srun` instead of `mpirun` |
-| MPI hangs in an interactive session | This is presently unsupported. We recommend launching jobs from `salloc` instead. |
 
 ## Spack
 
 [Spack](https://spack.io) is a package manager designed for high performance computing which allows for installation of various versions of softwares required for scientific computing. We provide some commonly used softwares, and you can supplement these by installing your own softwares with spack.
-
-For a full list of the currently installed spack packages run: `spack find`
 
 For more information see [Spack Resources](../getting_started/linux.md#spack)
 
@@ -73,7 +46,41 @@ or
 module load package_name
 ```
 
-## Additional Software
 
-In general, we recommend users install additional software to their home directory
-and independently manage/maintain it.
+## MPI
+> This section will discuss usage of MPI on Arjuna, and presumes familiarity with MPI.
+
+Arjuna provides MPI support via the [OpenMPI](https://www.open-mpi.org/) module (`module load openmpi/4.1.3`).
+Users should load this module if they are using MPI. The following prior installations are deprecated and not reccomended:
+
+- `module load openmpi/4.1.1`
+- MPI Installation at `/usr/local/mpirun`
+
+> `/usr/local/mpirun` is on the `PATH` by default. However it is **not supported**, and will be removed in the future.
+> Users are __strongly__ encouraged to use `module load openmpi/4.1.3` instead.
+
+Using legacy launchers (i.e. `mpirun` or `mpiexec`) is __not supported__ using `openmpi/4.1.3` and __not recommended__ on other mpi installations. Please use `srun` to launch mpi jobs. 
+
+If users need a different version of mpi than the ones provided, they can install their own via spack or build their own from source. Users are advised to first read the [slurm documentation regarding mpi](https://slurm.schedmd.com/mpi_guide.html) before installing mpi, and make sure to build mpi with pmi and slurm support.
+
+### PMI
+Arjuna has support for `pmi`, `pmi2`, and `pmix`. To run a job using a specified pmi, launch your jobs using the `--mpi` flag provided by `srun`.
+
+### Interactive MPI Jobs
+Running MPI Jobs from within interactive jobs launched via `srun <options> --pty bash` is __not supported__ (and will hang). 
+
+
+### Example MPI Job
+
+
+```bash
+#!/bin/bash
+#SBATCH -N <N>
+#SBATCH -n <n>
+#SBATCH -A <account>
+#SBATCH -p <partition>
+
+module load openmpi/4.1.3
+srun --mpi=pmix <executable>
+```
+
