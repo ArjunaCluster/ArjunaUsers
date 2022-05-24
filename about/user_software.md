@@ -50,21 +50,21 @@ module load package_name
 ## MPI
 > This section will discuss usage of MPI on Arjuna, and presumes familiarity with MPI.
 
-Arjuna provides MPI support via the [OpenMPI](https://www.open-mpi.org/) module (`module load openmpi/4.1.3`).
-Users should load this module if they are using MPI. The following prior installations are deprecated and not reccomended:
+Arjuna provides MPI support via the [OpenMPI](https://www.open-mpi.org/) version 4.1.3 module (`module load openmpi`).
+Users should load this module if they are using MPI. The following prior installations are deprecated and not recomended:
 
 - `module load openmpi/4.1.1`
 - MPI Installation at `/usr/local/mpirun`
 
 > `/usr/local/mpirun` is on the `PATH` by default. However it is **not supported**, and will be removed in the future.
-> Users are __strongly__ encouraged to use `module load openmpi/4.1.3` instead.
+> Users are __strongly__ encouraged to use `module load openmpi` instead.
 
-Using legacy launchers (i.e. `mpirun` or `mpiexec`) is __not supported__ using `openmpi/4.1.3` and __not recommended__ on other mpi installations. Please use `srun` to launch mpi jobs. 
+Using legacy launchers (i.e. `mpirun` or `mpiexec`) is __not supported__ using the provided `openmpi` and __not recommended__ on other mpi installations. Please use `srun` to launch mpi jobs. 
 
-If users need a different version of mpi than the ones provided, they can install their own via spack or build their own from source. Users are advised to first read the [slurm documentation regarding mpi](https://slurm.schedmd.com/mpi_guide.html) before installing mpi, and make sure to build mpi with pmi and slurm support.
+If users need a different version of MPI than the ones provided, they can install their own via spack or other build tools. Users are advised to first read the [slurm documentation regarding mpi](https://slurm.schedmd.com/mpi_guide.html) before installing MPI, and make sure to build MPI with PMI and slurm support.
 
 ### PMI
-Arjuna has support for `pmi`, `pmi2`, and `pmix`. To run a job using a specified pmi, launch your jobs using the `--mpi` flag provided by `srun`.
+Arjuna has support for `pmi`, `pmi2`, and `pmix`. To run a job using a specified pmi, launch your jobs using the `--mpi` flag provided by `srun`. If you are unsure of what to use, we recommend trying `--mpi=pmix` first.
 
 ### Interactive MPI Jobs
 Running MPI Jobs from within interactive jobs launched via `srun <options> --pty bash` is __not supported__ (and will hang). 
