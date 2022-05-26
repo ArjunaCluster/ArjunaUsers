@@ -1,0 +1,74 @@
+name: User Support
+description: Get support for an issue on Arjuna
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        If you notice an issue on Arjuna, please *first search the existing issues* and ensure that it has not been reported. If you notice a similar example, please *comment on that issue*.
+
+        Tips for getting help
+        - Quote your shell/log files with ``` `backticks` ```. It makes reading them **much** easier
+        - Include **both** the output of a command **and** the command itself
+        - A minimal working example is a huge plus, we do not debug user code
+        - Unfamiliar with Markdown? See Github's [Markdown Guide](https://guides.github.com/features/mastering-markdown/)
+
+        Requests for support with insufficient information will be tagged `incomplete` and closed. If this happens to you, please add additional information and re-open the issue
+
+  - type: input
+    attributes:
+      label: Your Name
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Andrew ID
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Where it Happened
+      description: Provide the JobIds and Nodes where the problem occurred.
+      placeholder: |
+        JobID: 129999
+        Nodes: c001
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: What Happened?
+      description: What behavior was observed and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Steps to reproduce
+      description: What specific commands are needed to reproduce the issue?
+      render: Shell
+      placeholder: |
+        conda activate ...
+        sbatch ...
+  - type: textarea
+    attributes:
+      label: Job Submission Script
+      description: Provide the job submission script (If any)
+      render: bash
+      placeholder: |
+        #!/bin/bash
+        #SBATCH --ntasks 28
+        #SBATCH --cpus-per-task 1
+  - type: textarea
+    attributes:
+      label: What I've tried
+      description: |
+        List what you've tried to debug the issue, and any commands you've tried.
+        Include **both** the output of a command **and** the command itself.
+      placeholder: |
+        1. I googled the error message and got ....
+        2. I searched for similar issues and tried X, Y, Z
+        3. I ran the following:
+
+        ```shell
+        > awesome_command
+        Output from awesome_command
+        ```
