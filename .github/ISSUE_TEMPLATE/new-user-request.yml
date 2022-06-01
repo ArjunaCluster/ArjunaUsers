@@ -57,6 +57,20 @@ body:
   - type: markdown
     attributes:
       value: |
+        ## Arjuna Acceptable Use Policy
+        Please read the [Acceptable Use Policy](https://arjunacluster.github.io/ArjunaUsers/about/accounts.html#acceptable-use-policy).
+
+        > You're probably okay if you use Arjuna for research, don't share accounts, and don't run things on the head node.
+  - type: dropdown
+    attributes:
+      label: "I have read and will abide by the Acceptable Use Policy."
+      options:
+        - "Yes"
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
         ## Next steps
         You will receive an email from `the Arjuna Admins <root@coe.psc.edu` with your login information in 10 business days.
         If you do not, please comment on this issue, ***do not open another issue***
