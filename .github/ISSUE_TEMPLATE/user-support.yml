@@ -8,21 +8,23 @@ body:
         If you notice an issue on Arjuna, please *first search the existing issues* and ensure that it has not been reported. If you notice a similar example, please *comment on that issue*.
 
         Tips for getting help
-        - Quote your shell/log files with ``` `backticks` ```. It makes reading them **much** easier
-        - Include **both** the output of a command **and** the command itself
-        - A minimal working example is a huge plus, we do not debug user code
-        - Unfamiliar with Markdown? See Github's [Markdown Guide](https://guides.github.com/features/mastering-markdown/)
+        - Quote your shell/log files with ``` `backticks` ```. It makes reading them **much** easier.
+        - Include **both** the output of a command **and** the command itself.
+        - A [Minimal, Reproducible Example](https://stackoverflow.com/help/minimal-reproducible-example) is strongly recommended. Issues lacking a MRE may be tagged incomplete.
+        - Unfamiliar with Markdown? See Github's [Markdown Guide](https://guides.github.com/features/mastering-markdown/).
 
-        Requests for support with insufficient information will be tagged `incomplete` and closed. If this happens to you, please add additional information and re-open the issue
+        Requests for support with insufficient information will be tagged `incomplete` and closed. If this happens to you, please add additional information and re-open the issue.
 
   - type: input
     attributes:
       label: Your Name
+      placeholder: Scotty
     validations:
       required: true
   - type: input
     attributes:
       label: Andrew ID
+      placeholder: sterrier
     validations:
       required: true
   - type: textarea
@@ -38,12 +40,16 @@ body:
     attributes:
       label: What Happened?
       description: What behavior was observed and what did you expect?
+      placeholder: When I submit my job I got X, but I expected Y
     validations:
       required: true
   - type: textarea
     attributes:
       label: Steps to reproduce
-      description: What specific commands are needed to reproduce the issue?
+      description: >
+        What specific commands are needed to reproduce the issue?
+        This should be a [Minimal, Reproducible Example](https://stackoverflow.com/help/minimal-reproducible-example) of the issue.
+        No needed to add backticks, your response will automatically be formatted as a shell script.
       render: Shell
       placeholder: |
         conda activate ...
@@ -51,7 +57,9 @@ body:
   - type: textarea
     attributes:
       label: Job Submission Script
-      description: Provide the job submission script (If any)
+      description: >
+        Copy and paste the contents of your job submission script.
+        No needed to add backticks, your response will automatically be formatted as a shell script.
       render: bash
       placeholder: |
         #!/bin/bash
@@ -60,7 +68,7 @@ body:
   - type: textarea
     attributes:
       label: What I've tried
-      description: |
+      description: >
         List what you've tried to debug the issue, and any commands you've tried.
         Include **both** the output of a command **and** the command itself.
       placeholder: |
