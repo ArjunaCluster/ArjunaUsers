@@ -15,6 +15,8 @@ New Users can request an account by [opening an issue] on Github.
 
 ## Acceptable Use Policy
 
+> You're probably okay if you use Arjuna for research, don't share accounts, and don't run things on the head node.
+
 Users are expected to abide by [CMU's Computing Policies](https://www.cmu.edu/policies/information-technology/computing.html), as well as, the following policies:
 
 1. You will protect any access credentials (e.g., private keys, tokens & passwords) that are issued for your sole use and not knowingly allow any other person to impersonate or share any of your identities.
