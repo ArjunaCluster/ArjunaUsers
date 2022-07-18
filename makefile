@@ -18,7 +18,6 @@ test: _site/
 	bundle exec htmlproofer \
 	--allow-hash-href \
 	--disable-external \
-	--check-html --check-img-http --enforce-https \
 	_site/
 
 # Build and serve the site for viewing locally
