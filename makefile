@@ -1,5 +1,5 @@
 # Pull the baseurl from _config.yml
-BASEURL ?= $(shell grep baseurl _config.yml | awk '{print $2}')
+BASEURL ?= $(word 2, $(shell grep baseurl _config.yml))
 
 build: _site/
 
@@ -18,7 +18,6 @@ test: _site/
 	bundle exec htmlproofer \
 	--allow-hash-href \
 	--disable-external \
-	--check-html --check-img-http --enforce-https \
 	_site/
 
 # Build and serve the site for viewing locally

@@ -65,7 +65,7 @@ information about requesting GPUs.
 ### Internet Access
 Workers can not resolve [domain names](https://en.wikipedia.org/wiki/Domain_name), and as a result, most internet services may not function correctly. For example,
 
-- Cloning a git repository from [github.com]()
+- Cloning a git repository from [github.com](https://github.com/)
 - Downloading packages using `spack`, `pip`, `conda` or `Pkg.jl`
 - Downloading files with `wget`, `rclone` or `curl` from the Internet
 
