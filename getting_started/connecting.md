@@ -17,14 +17,14 @@ ssh andrewID@arjuna.psc.edu
 As Arjuna is on the CMU network, the above command will only work if you are also
 connected to the CMU Network (i.e. you are on campus).
 
-When you first login to Arjuna, you will be prompted for a password.  Enter the password given to you by the Administrator who created your account. You will be immediately required to change it.
+When you first log in to Arjuna, you will be prompted for a password.  Enter the password given to you by the Administrator who created your account. You will be immediately required to change it.
 
 ### Arjuna's SSH key fingerprints
 
 Public Key fingerprints are used to validate the connection to a remote server.
 When connecting to a server for the first time you will be prompted to verify
-the authenticity of the server, by comparing the fingerprint of the server's to
-what your expect it to be.
+the authenticity of the server, by comparing the server's reported fingerprint to
+the expected fingerprint.
 
 Arjuna's public key fingerprints are:
 
