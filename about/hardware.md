@@ -52,6 +52,10 @@ memory per requested CPU. See [Allocating Resources] for more information.
 For more information on the partitions and their default settings run
 `scontrol show partitions` on Arjuna.
 
+> We reserve 2 cores per node for system usage (e.g. the [slurmd daemon](../getting_started/slurm_intro.md)).
+> These cores are not available for jobs. For example, a node from the `gpu` partition has up to 62 cores per node
+> available for jobs.
+
 ### GPU Nodes
 
 Each GPU Nodes has 4 [K80 NVIDIA GPUs] available for usage. To request a gpu, use

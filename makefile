@@ -16,8 +16,8 @@ _site/: Gemfile.lock _config.yml $(SRC)
 # Run test on the website using htmlproofer
 test: _site/
 	bundle exec htmlproofer \
-	--allow-hash-href \
-	--disable-external \
+	--root-dir=_site/ \
+	--disable-external=true \
 	_site/
 
 # Build and serve the site for viewing locally
