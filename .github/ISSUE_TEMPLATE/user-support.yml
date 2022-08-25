@@ -1,5 +1,6 @@
-name: User Support
+name: Tech Support
 description: Get support for an issue on Arjuna
+labels: tech-support
 
 body:
   - type: markdown
