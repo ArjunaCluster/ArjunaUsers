@@ -1,0 +1,24 @@
+name: A Node is Down
+description: Report a downed node on Arjuna
+labels:
+  - service-outage
+
+body:
+  - type: markdown
+    attributes:
+      value: Report a downed node(s) on Arjuna. If an open issue already exists for the node, please do not submit a duplicate!
+  - type: input
+    attributes:
+      label: Node Name
+      description: Which nodes are down?
+      placeholder: c021, f003
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: When?
+      description: When did you first notice it was offline?
+  - type: input
+    attributes:
+      label: Additional Information?
+      description: Any additional information to report?
