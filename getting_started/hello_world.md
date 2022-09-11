@@ -22,7 +22,7 @@ content:
 
 ```bash
 #!/bin/bash
-#SBATCH --N=1
+#SBATCH -n=1
 #SBATCH --mem=2G
 echo "Hello World!"
 ```
@@ -31,7 +31,7 @@ echo "Hello World!"
 
 1) `#!/bin/bash` This is a [shebang] it tells Linux how to handle the file.
 Here's we're saying use `bash` to run this file
-2) `#SBATCH --N=1` This is a SLURM directive asking for 1 CPU
+2) `#SBATCH -n=1` This is a SLURM directive asking for 1 CPU
 3) `#SBATCH --mem=2G` Now we're asking for 2G of Memory in bytes. Notice the
 suffix `G`, the default suffix is `M`, but we can also use `K` or `T`
 4) `echo "Hello World!"` This is the command that gets run on the compute node
