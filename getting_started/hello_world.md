@@ -22,7 +22,7 @@ content:
 
 ```bash
 #!/bin/bash
-#SBATCH --cpus=1
+#SBATCH -n 1
 #SBATCH --mem=2G
 echo "Hello World!"
 ```
@@ -31,8 +31,8 @@ echo "Hello World!"
 
 1) `#!/bin/bash` This is a [shebang] it tells Linux how to handle the file.
 Here's we're saying use `bash` to run this file
-2) `#SBATCH --cpus=1` This is a SLURM directive asking for 1 CPU
-3) `#SBATCH --mem=2G` Now we're asking for 2G of Memory in bytes. Notice the
+2) `#SBATCH -n 1` This is a SLURM directive asking for 1 task
+3) `#SBATCH --mem=2G` Now we're asking for 2 gigabytes of memory. Notice the
 suffix `G`, the default suffix is `M`, but we can also use `K` or `T`
 4) `echo "Hello World!"` This is the command that gets run on the compute node
 
@@ -43,7 +43,7 @@ For more SLURM directives, see `man sbatch` or the documentation for [sbatch].
 
 ### Submitting the Job
 
-To submit the job, run the following command: `sbatch ~/test.sh`.
+To submit the job, run the following command: `sbatch ~/hello_world.sh`.
 
 ```shell
 > sbatch ~/test.sh
@@ -95,6 +95,7 @@ Hello World!
 > `#SBATCH -output` directives or `sbatch`'s command line flags `--output`.
 > See [sbatch] for more information.
 
+[sbatch]: https://slurm.schedmd.com/sbatch.html
 
 This file will contain the [standard output] of the script `~/hello_world.sh`.
 Job scripts are not limited to just this file. Output can be saved to other files
@@ -102,7 +103,7 @@ like this:
 
 ```bash
 #!/bin/bash
-#SBATCH --cpus=1
+#SBATCH -n 1
 #SBATCH --mem=2G
 echo "Hello World!" > ~/another_file.txt
 ```
