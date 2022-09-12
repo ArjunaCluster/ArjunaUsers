@@ -116,6 +116,7 @@ After completing [steps 1 - 3 above](#configuring-rclone-remotes): you will be p
 5. Open the link in a browser (If you entered `y` above a browser window should open).
     - Choose the Google account to which you want to back up (i.e. your Andrew Account).
     - If using a personal client id, you may get a warning that "Google hasn't verified this app", click "Continue".
+    - If you get an Error that "Google hasn't verified this app", go back to the Google API Console and set the app back to "Testing". Add your Google Account as a test user.
 
 6. After authenticating, copy the code and paste it into the rclone prompt.
 7. The remaining defaults should be fine.
