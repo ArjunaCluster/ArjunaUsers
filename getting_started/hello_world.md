@@ -103,7 +103,7 @@ like this:
 
 ```bash
 #!/bin/bash
-#SBATCH --cpus=1
+#SBATCH -n 1
 #SBATCH --mem=2G
 echo "Hello World!" > ~/another_file.txt
 ```
