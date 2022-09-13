@@ -105,7 +105,7 @@ We have provided additional instructions for [Google Drive](#google-drive) and [
 
 After completing [steps 1 - 3 above](#configuring-rclone-remotes): you will be prompted to enter a [`client_id`](https://rclone.org/drive/#making-your-own-client-id)
 
-1. When prompted for a [`client_id`](https://rclone.org/drive/#making-your-own-client-id), follow the instruction on the linked page.
+1. You can create your `client_id` following the instructions given [here](https://rclone.org/drive/#making-your-own-client-id).
     - *You must use a non-CMU account* due to institutional restrictions.
     - You *can* use this client id to sync with your Andrew GDrive account.
     - When creating the client_id on the Google API Console, leave the app as testing and add your google account as a test user.
