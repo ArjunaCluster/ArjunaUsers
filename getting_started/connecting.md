@@ -14,8 +14,11 @@ terminal:
 ssh andrewID@arjuna.psc.edu
 ```
 
-As Arjuna is on the CMU network, the above command will only work if you are also
-connected to the CMU Network (i.e. you are on campus or using [CMU's VPN]).
+To connect to Arjuna, you must either be on the [campus network], connect via the [linux timeshare], or using [CMU's Full VPN].
+
+[campus network]: https://www.cmu.edu/computing/services/endpoint/network-access/
+[linux timeshare]: https://www.cmu.edu/computing/services/endpoint/software/how-to/timeshare-linux.html
+[CMU's Full VPN]: https://www.cmu.edu/computing/services/endpoint/network-access/vpn/how-to/
 
 When you first log in to Arjuna, you will be prompted for a password.  Enter the password given to you by the Administrator who created your account. You will be immediately required to change it.
 
@@ -37,12 +40,10 @@ Arjuna's public key fingerprints are:
 > You **should not** connect to Arjuna if the fingerprints do not match.
 > Please open an [issue](https://github.com/ArjunaCluster/ArjunaUsers/issues)
 
-### Accessing Arjuna via CMU's VPN
+### Accessing Arjuna via CMU's Full VPN
 
-If you are not on campus, you must first connect to [CMU's VPN]. Once connected
+If you are not on campus, you must first connect to [CMU's Full VPN]. Once connected
 you can then `ssh` into Arjuna.
-
-[CMU's VPN]: https://www.cmu.edu/computing/services/endpoint/network-access/vpn/how-to/
 
 ## Configuring SSH
 
