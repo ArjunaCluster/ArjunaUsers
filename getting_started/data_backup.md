@@ -105,17 +105,17 @@ We have provided additional instructions for [Google Drive](#google-drive) and [
 
 After completing [steps 1 - 3 above](#configuring-rclone-remotes): you will be prompted to enter a [`client_id`](https://rclone.org/drive/#making-your-own-client-id)
 
-1. When prompted from a [`client_id`](https://rclone.org/drive/#making-your-own-client-id), follow the instruction on the linked page.
+1. You can create your `client_id` following the instructions given [here](https://rclone.org/drive/#making-your-own-client-id).
     - *You must use a non-CMU account* due to institutional restrictions.
     - You *can* use this client id to sync with your Andrew GDrive account.
-    - You can skip this step, but performance may be limited.
+    - When creating the client_id on the Google API Console, leave the app as testing and add your google account as a test user.
 
 2. Paste your `client_id` and then `secret` when prompted by `rclone configure`.
 3. The default options are fine until reaching "Use auto config?".
 4. For "Use auto config?" enter `n` if configuring rclone on arjuna (Or another headless machine). Otherwise, enter `y`
 5. Open the link in a browser (If you entered `y` above a browser window should open).
-    - Choose the Google account to which you want to back up (i.e. your Andrew Account).
-    - If using a personal client id, you may get a warning that "Google hasn't verified this app", click "Continue".
+    - Choose the Google account to which you want to back up (i.e. your Andrew Account, must be a test user).
+    - If you get an error that "Google hasn't verified this app", make sure that you've set the app status as "Testing" on the Google API Console and that you've added your google account as a test user. 
 
 6. After authenticating, copy the code and paste it into the rclone prompt.
 7. The remaining defaults should be fine.
