@@ -2,6 +2,7 @@ name: A Node is Down
 description: Report a downed node on Arjuna
 labels:
   - service-outage
+  - notify
 
 body:
   - type: markdown
