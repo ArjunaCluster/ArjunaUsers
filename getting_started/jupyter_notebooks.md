@@ -8,9 +8,9 @@ nav_order: 6
 # Running Jupyter Notebooks with Visual Studio Code
 
 Jupyter Notebooks offer a convenient way to interactively work on something,
-but can be a heavy computational workload and are [prohibited from running on
-the head node](../about/accounts.md#acceptable-use-policy). You must run
-notebooks on the worker nodes, as described, in this tutorial.
+but can be a heavy computational workload and are
+[prohibited from running on the head node](../about/accounts.md#acceptable-use-policy).
+You must run notebooks on the worker nodes, as described, in this tutorial.
 
 > Notebooks run on the headnode may be terminated without warning
 
