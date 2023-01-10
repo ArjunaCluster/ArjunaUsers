@@ -20,6 +20,8 @@ body:
         - "Noa Marom"
         - "Zachary Ulissi"
         - "Amir Barati Farimani"
+        - "Alan McGaughey"
+        - "John Kitchin"
         - "Other"
     validations:
       required: true
