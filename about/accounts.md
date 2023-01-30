@@ -9,9 +9,13 @@ nav_order: 4
 
 ## Requesting an Account
 
-New Users can request an account by [opening an issue] on Github.
+New Users can request an account by [opening an issue][issue] on Github. You
+must have an andrewid to access Arjuna. If you do not have an andrewid, you can
+request a
+[vistor account](https://www.cmu.edu/computing/services/security/identity-access/account/sponsored.html)
+from CMU.
 
-[opening an issue]: https://github.com/ArjunaCluster/ArjunaUsers/issues/
+[issue]: https://github.com/ArjunaCluster/ArjunaUsers/issues/
 
 ## Acceptable Use Policy
 
@@ -45,6 +49,10 @@ your password expires. You have an additional 90 days to change your password, a
 which your account *will be marked inactive.*
 
 > Sharing passwords, or other account information, is a violation of the [Acceptable Use Policy](#acceptable-use-policy).
+
+## Forgot Password
+
+Open a ["Password Reset" issue][issue] on GitHub. We strongly recommend the use of a password manager.
 
 ## Inactive Accounts
 
