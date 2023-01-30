@@ -60,5 +60,5 @@ Accounts marked inactive for 90 days may be deactivated. Any files in the user's
 home directory will be transferred to a suitable executor
 (i.e. an individual in the same group).
 
-If your account becomes inactive, please [open an issue] to reactivate it.
+If your account becomes inactive, please [open an issue][issue] to reactivate it.
 To prevent your account from becoming inactive, login at least once every 180 days.
