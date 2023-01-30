@@ -16,4 +16,3 @@ vendor/
 # Make Targets
 _site/
 *.zip
-ruby.install
