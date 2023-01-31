@@ -53,6 +53,7 @@ which your account *will be marked inactive.*
 ## Forgot Password
 
 Open a ["Password Reset" issue][issue] on GitHub. We strongly recommend the use of a [password manager](https://www.cmu.edu/iso/governance/guidance/password-managers.html).
+
 ## Inactive Accounts
 
 Accounts marked inactive for 90 days may be deactivated. Any files in the user's
