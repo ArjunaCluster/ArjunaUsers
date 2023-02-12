@@ -58,7 +58,11 @@ when navigating git.
 **[PSC's Getting Started with HPC]:** Pittsburgh Supercomputers Center's guide
 to getting started with HPC.
 
+**[HPC User Guide (SURF)]:** Has some nice example job scripts for various use cases.
+
 [PSC's Getting Started with HPC]: https://www.psc.edu/resources/bridges-2/getting-started-with-hpc/
+
+[HPC User Guide (SURF)]: https://servicedesk.surf.nl/wiki/display/WIKI/SURF+User+Knowledge+Base
 
 **[SLURM](https://slurm.schedmd.com/):** SLURM's Documentations
 
