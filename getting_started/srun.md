@@ -1,9 +1,9 @@
 ## `srun`: Submitting Jobs to the Slurm Workload Manager
 
-`srun` is a command-line tool used for submitting jobs to the Slurm workload manager, offering a wide range of options for customizing job submission, and essentially letting you run parallel jobs on a cluster managed by slrum.
+`srun` is a command-line tool used for submitting jobs to the Slurm workload manager, offering a wide range of options for customizing job submission, and essentially letting you run parallel jobs on a cluster managed by Slrum.
 With `srun`, users can easily launch jobs that require multiple CPU cores, large amounts of memory, and long runtimes, while taking advantage of the scalability and reliability of the Slurm workload manager.
 
-You can find more information about slurm [here](https://github.com/ArjunaCluster/ArjunaUsers/blob/main/getting_started/slurm_intro.md)
+You can find more information about Slurm [here](https://arjunacluster.github.io/ArjunaUsers/getting_started/slurm_intro.html)
 
 ### `srun` examples
 
@@ -19,7 +19,7 @@ where `command` is the command or script to be executed.
 > Actually, you may dismiss it and launch `srun`.
 > We fixed it in older issues.
 
-To request one node, with 2GB of memory, for 30 minutes, on the `cpu` partition, type:
+To start an interactive job requesting one node, 2GB of memory, for 30 minutes, on the `cpu` partition, type:
 
 ```
 srun --partition=cpu --nodes=1 --mem=2G --time=30 --pty bash
@@ -28,7 +28,7 @@ srun --partition=cpu --nodes=1 --mem=2G --time=30 --pty bash
 > The option `--pty` here is essential to start an interactive job.
 
 You can also get notification by email when the interactive environment is ready if you want.
-If your email address is AndrewID@andrew.cmu.edu, to request one node, with 1 task, 1GB of memory, for 2 minutes, on the `cpu` partition, type:
+If your email address is AndrewID@andrew.cmu.edu, to start an interactive job requesting one node, 1 task, 1GB of memory, for 2 minutes, on the `cpu` partition, type:
 
 ```
 srun --partition=cpu --ntasks=1 --nodes=1 --mem=1G --time=2 --mail-type=BEGIN --mail-user=AndrewID@andrew.cmu.edu --pty bash
