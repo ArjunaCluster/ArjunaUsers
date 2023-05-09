@@ -1,8 +1,6 @@
 ## `srun`: Submitting Jobs to the Slurm Workload Manager
 
-`srun` is a command-line tool used for submitting jobs to the Slurm workload manager, offering a wide range of options for customizing job submission, and essentially letting you run parallel jobs on a cluster managed by Slurm.
-
-You can find more information about Slurm [here](https://arjunacluster.github.io/ArjunaUsers/getting_started/slurm_intro.html)
+[`srun`](https://slurm.schedmd.com/srun.html) is a command-line tool used for submitting jobs to the Slurm workload manager, offering a wide range of options for customizing job submission, and essentially letting you run parallel jobs on a cluster managed by [Slurm](./slurm_intro.md).
 
 ### `srun` examples
 
@@ -29,11 +27,11 @@ If you want, you can get a notification by email when the interactive environmen
 If your email address is <andrewID>@andrew.cmu.edu, to start an interactive job requesting one node, 1 task, 1GB of memory, for 2 minutes, on the `cpu` partition, type:
 
 ```
-srun --partition=cpu --ntasks=1 --nodes=1 --mem=1G --time=2 --mail-type=BEGIN --mail-user=AndrewID@andrew.cmu.edu --pty bash
+srun --partition=cpu --ntasks=1 --nodes=1 --mem=1G --time=2 --mail-type=BEGIN --mail-user=andrewID@andrew.cmu.edu --pty bash
 ```
 
 You can also submit a job using `srun`.
-To run a Python script named `my_script.py`, using 1 node, 1GB memory, 1 minute, redirecting stdout to 'out', redirect stderr to 'error', on the `debug` partition, type:
+To run a Python script named `my_script.py`, using 1 node, 1GB memory, 1 minute, redirecting stdout to 'out', redirect stderr to 'error', on the [`debug` partition](../about/hardware.md#partitions), type:
 
 ```
 srun --partition=debug --node=1 --mem=1G --time=1 --output=out --error=error python my_script.py
