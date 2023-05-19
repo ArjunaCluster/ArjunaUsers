@@ -1,5 +1,11 @@
-## `srun`: Submitting Jobs to the Slurm Workload Manager
+---
+title: Submitting Interactive Jobs
+layout: default
+parent: Getting Started
+nav_order: 7
+---
 
+# Submitting Interactive Jobs with `srun`
 `srun` is a command-line tool used for submitting jobs to the Slurm workload manager, offering a wide range of options for customizing job submission, and essentially letting you run parallel jobs on a cluster managed by Slurm.
 
 You can find more information about Slurm [here](https://arjunacluster.github.io/ArjunaUsers/getting_started/slurm_intro.html)
