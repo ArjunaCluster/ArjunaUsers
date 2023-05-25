@@ -75,6 +75,7 @@ body:
       value: |
         ## Next steps
         You will receive an email from `the Arjuna Admins <root@coe.psc.edu>` with your login information within 10 business days.
+        Emails are sent to your CMU email address, `<andrewid@andrew.cmu.edu>`.
         If you do not, please comment on this issue, ***do not open another issue***
 
         In the meantime, check out our documentation [https://arjunacluster.github.io/ArjunaUsers/]()
